@@ -1,0 +1,14 @@
+﻿@model IEnumerable<EntityFrameworkFolha.FoPagAux.Entidades.Alocacao>
+<!--<a href="/?EscalaID=m.EscalaID" id="m.EscalaID" onclick="AtualizaWidgetEscala(m.EscalaID)">m.Nome</a>-->
+<select id="alocacao" name="alocacao">
+    @{
+        foreach (var m in Model)
+        {
+            var selected = (ViewBag.AlocacaoID == m.AlocacaoID) ? "selected" : "";
+            
+            <option value="@m.AlocacaoID" @selected>
+                @m.Nome
+            </option>
+        }
+    }
+</select>

@@ -1,0 +1,409 @@
+﻿@model EntityFrameworkFolha.FoPagAux.Entidades.Funcionario
+
+<div id="content">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Cadastros
+                <span>
+                    >
+                    Funcionários
+                </span>
+            </h1>
+        </div>
+    </div>
+
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-6">
+
+
+                <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-building"></i> </span>
+                        <h2>Editar Dados do Funcionário</h2>
+
+                    </header>
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+
+                        <div class="widget-body no-padding">
+                            @using (Html.BeginForm("Edit", "Funcionarios", FormMethod.Post, new { id = "checkout-form", @class = "smart-form", novalidate = "novalidate" }))
+                            {
+                                @Html.AntiForgeryToken()
+                            <fieldset>
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.FuncionarioID)
+                                @Html.HiddenFor(model => model.DataCriacao)
+                                @Html.HiddenFor(model => model.UsuarioCriacao)
+                                @Html.HiddenFor(model => model.DataAlteracao)
+                                @Html.HiddenFor(model => model.UsuarioAlteracao)
+
+                                <div class="row">
+                                    <section class="col col-6">
+                                        Nome
+                                        <label class="input">
+                                            <i class="icon-prepend fa fa-building"></i>
+                                            @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @type = "text", @name = "nome", @placeholder = "Nome", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                                        </label>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6">
+                                        RG
+                                        <label class="input">
+                                            <i class="icon-prepend fa fa-building"></i>
+                                            @Html.EditorFor(model => model.RG, new { htmlAttributes = new { @type = "text", @name = "RG", @placeholder = "RG", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.RG, "", new { @class = "text-danger" })
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        CPF
+                                        <label class="input">
+                                            <i class="icon-prepend fa fa-building"></i>
+                                            @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @type = "text", @name = "CPF", @placeholder = "CPF", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        CTPS
+                                        <label class="input">
+                                            <i class="icon-prepend fa fa-building"></i>
+                                            @Html.EditorFor(model => model.CTPS, new { htmlAttributes = new { @type = "text", @name = "CTPS", @placeholder = "CTPS", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CTPS, "", new { @class = "text-danger" })
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        Matrícula
+                                        <label class="input">
+                                            <i class="icon-prepend fa fa-building"></i>
+                                            @Html.EditorFor(model => model.Matricula, new { htmlAttributes = new { @type = "text", @name = "Matricula", @placeholder = "Matricula", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Matricula, "", new { @class = "text-danger" })
+                                        </label>
+                                    </section>
+
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6">
+                                        Telefone Celular
+                                        <label class="input">
+                                            <i class="icon-prepend fa fa-building"></i>
+                                            @Html.EditorFor(model => model.TelefoneCelular, new { htmlAttributes = new { @type = "text", @name = "TelefoneCelular", @placeholder = "TelefoneCelular", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TelefoneCelular, "", new { @class = "text-danger" })
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        Telefone Residencial
+                                        <label class="input">
+                                            <i class="icon-prepend fa fa-building"></i>
+                                            @Html.EditorFor(model => model.TelefoneResidencial, new { htmlAttributes = new { @type = "text", @name = "TelefoneResidencial", @placeholder = "TelefoneResidencial", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.TelefoneResidencial, "", new { @class = "text-danger" })
+                                        </label>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-6">
+                                        Email
+                                        <label class="input">
+                                            <i class="icon-prepend fa fa-building"></i>
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @type = "text", @name = "Email", @placeholder = "Email", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        Rede Social
+                                        <label class="input">
+                                            <i class="icon-prepend fa fa-building"></i>
+                                            @Html.EditorFor(model => model.RedeSocial, new { htmlAttributes = new { @type = "text", @name = "RedeSocial", @placeholder = "RedeSocial", @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.RedeSocial, "", new { @class = "text-danger" })
+                                        </label>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+                                    <section class="col col-4">
+                                        Início
+                                        <label class="input">
+                                            <i class="icon-prepend fa fa-building"></i>
+                                            @{
+                                                var inicio = "";
+                                                if (Model.Inicio.HasValue)
+                                                {
+                                                    inicio = Model.Inicio.Value.ToString("yyyy-MM-dd");
+                                                }
+
+                                            }
+
+                                            @Html.EditorFor(model => model.Inicio)
+
+                                            @Html.ValidationMessageFor(model => model.Inicio, "", new { @class = "text-danger" })
+                                        </label>
+                                    </section>
+                                    <section class="col col-4">
+                                        Admissão
+                                        <label class="input">
+                                            <i class="icon-prepend fa fa-building"></i>
+                                            @{
+                                                var admissao = "";
+                                                if (Model.Admissao.HasValue)
+                                                {
+                                                    admissao = Model.Admissao.Value.ToString("yyyy-MM-dd");
+                                                }
+
+                                            }
+                                            @Html.EditorFor(model => model.Admissao)
+                                            @Html.ValidationMessageFor(model => model.Admissao, "", new { @class = "text-danger" })
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-4">
+                                        Demissão
+                                        <label class="input">
+                                            <i class="icon-prepend fa fa-building"></i>
+                                            @{
+                                                var demissao = "";
+                                                if (Model.Demissao.HasValue)
+                                                {
+                                                    demissao = Model.Demissao.Value.ToString("yyyy-MM-dd");
+                                                }
+
+                                            }
+                                            @Html.EditorFor(model => model.Demissao)
+                                            @Html.ValidationMessageFor(model => model.Demissao, "", new { @class = "text-danger" })
+                                        </label>
+                                    </section>
+                                </div>
+
+                                <!-- SELECTS -->
+                                <div class="row">
+                                    <section class="col col-4">
+                                        1° Empresa
+                                        <label class="input">
+                                            <input type="hidden" id="EmpresaID" name="EmpresaID" value="@Model.EmpresaID">
+                                            <input type="text" list="EmpresaList" id="Empresa" name="Empresa" value="@(Model.Empresa != null ? (Model.Empresa.Nome) : "")">
+                                            <datalist id="EmpresaList">
+                                                @foreach (var item in (SelectList)ViewBag.EmpresaID)
+                                                {
+                                                    var selected = (item.Value == Model.EmpresaID.ToString()) ? "selected=selected" : "";
+
+                                                    <option data-value="@item.Value" @selected>@item.Text</option>
+                                                }
+                                            </datalist>
+                                        </label>
+                                        @Html.ValidationMessageFor(model => model.EmpresaID, "", new { @class = "text-danger" })
+                                    </section>
+                                    <section class="col col-4">
+                                        2° Empresa
+                                        <label class="input">
+                                            <input type="hidden" id="Empresa2ID" name="Empresa2ID" value="@Model.Empresa2ID">
+                                            <input type="text" list="EmpresaList" id="Empresa" name="Empresa" value="@(Model.Empresa != null ? (Model.Empresa.Nome) : "")">
+                                            <datalist id="EmpresaList">
+                                                @foreach (var item in (SelectList)ViewBag.EmpresaID)
+                                                {
+                                                    var selected = (item.Value == Model.Empresa2ID.ToString()) ? "selected=selected" : "";
+
+                                                    <option data-value="@item.Value" @selected>@item.Text</option>
+                                                }
+                                            </datalist>
+                                        </label>
+                                        @Html.ValidationMessageFor(model => model.Empresa2ID, "", new { @class = "text-danger" })
+                                    </section>
+                                    <section class="col col-4">
+                                        3° Empresa
+                                        <label class="input">
+                                            <input type="hidden" id="Empresa3ID" name="Empresa3ID" value="@Model.Empresa3ID">
+                                            <input type="text" list="EmpresaList" id="Empresa" name="Empresa" value="@(Model.Empresa != null ? (Model.Empresa.Nome) : "")">
+                                            <datalist id="EmpresaList">
+                                                @foreach (var item in (SelectList)ViewBag.EmpresaID)
+                                                {
+                                                    var selected = (item.Value == Model.Empresa3ID.ToString()) ? "selected=selected" : "";
+
+                                                    <option data-value="@item.Value" @selected>@item.Text</option>
+                                                }
+                                            </datalist>
+                                        </label>
+                                        @Html.ValidationMessageFor(model => model.Empresa3ID, "", new { @class = "text-danger" })
+                                    </section>
+
+                                    <section class="col col-4">
+                                        Cargo
+                                        <label class="input">
+                                            <input type="hidden" id="CargoID" name="CargoID" value="@Model.CargoID">
+                                            <input type="text" list="CargoList" id="Cargo" name="Cargo" value="@(Model.Cargo != null ? (Model.Cargo.Nome) : "")">
+                                            <datalist id="CargoList">
+                                                @foreach (var item in (SelectList)ViewBag.CargoID)
+                                                {
+                                                    var selected = (item.Value == Model.CargoID.ToString()) ? "selected='selected'" : "";
+
+                                                    <option data-value="@item.Value" @selected>@item.Text</option>
+                                                }
+                                            </datalist>
+                                        </label>
+                                        @Html.ValidationMessageFor(model => model.CargoID, "", new { @class = "text-danger" })
+                                    </section>
+                                    <section class="col col-4">
+                                        Lider
+                                        <label class="input">
+                                            <input type="hidden" id="LiderID" name="LiderID" value="@Model.LiderID">
+                                            <input type="text" list="LiderList" id="Lider" name="Lider" value="@(Model.Lider != null ? (Model.Lider.Nome) : "")">
+                                            <datalist id="LiderList">
+                                                @foreach (var item in (SelectList)ViewBag.LiderID)
+                                                {
+                                                    var selected = (item.Value == Model.LiderID.ToString()) ? "selected=selected" : "";
+
+                                                    <option data-value="@item.Value" @selected>@item.Text</option>
+                                                }
+                                            </datalist>
+                                        </label>
+                                        @Html.ValidationMessageFor(model => model.LiderID, "", new { @class = "text-danger" })
+                                    </section>
+                                    <section class="col col-4">
+                                        Faixa Salarial
+                                        <label class="input">
+                                            <input type="hidden" id="SalarioID" name="SalarioID" value="@Model.SalarioID">
+                                            <input type="text" list="SalarioList" id="Salario" name="Salario" value="@(Model.Salario != null ? (Model.Salario.Nome) : "")">
+                                            <datalist id="SalarioList">
+                                                @foreach (var item in (SelectList)ViewBag.SalarioID)
+                                                {
+                                                    var selected = (item.Value == Model.SalarioID.ToString()) ? "selected=selected" : "";
+
+                                                    <option data-value="@item.Value" @selected>@item.Text</option>
+                                                }
+                                            </datalist>
+                                        </label>
+                                        @Html.ValidationMessageFor(model => model.SalarioID, "", new { @class = "text-danger" })
+                                    </section>
+
+                                    <section class="col col-4">
+                                        Posto de trabalho onde está alocado
+                                        <label class="input">
+                                            <input type="hidden" id="PostoTrabalhoID" name="PostoTrabalhoID" value="@Model.PostoTrabalhoID">
+                                            <input type="text" list="PostoTrabalhoList" id="PostoTrabalho" name="PostoTrabalho" placeholder="Escolha o Posto de trabalho" value="@(Model.PostoTrabalho != null ? (Model.PostoTrabalho.Nome) : "")">
+                                            <datalist id="PostoTrabalhoList">
+                                                @foreach (var item in (SelectList)ViewBag.PostoTrabalhoID)
+                                                {
+                                                    var selected = (item.Value == Model.PostoTrabalhoID.ToString()) ? "selected=selected" : "";
+
+                                                    <option data-value="@item.Value" @selected>@item.Text</option>
+                                                }
+                                            </datalist>
+                                        </label>
+                                        @Html.ValidationMessageFor(model => model.PostoTrabalhoID, "", new { @class = "text-danger" })
+                                    </section>
+
+                                    <!-- FIM SELECTS -->
+                                </div>
+                            </fieldset>
+                                <footer>
+                                    <button type="submit" class="btn btn-primary">
+                                        Alterar
+                                    </button>
+                                </footer>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+</div>
+
+@section pagespecific {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            document.querySelectorAll('input[list]').forEach(function (x, y, z) {
+                x.addEventListener('input', function (e) {
+                    var input = e.target,
+                        list = input.getAttribute('list'),
+                        options = document.querySelectorAll('#' + list + ' option'),
+                        hiddenInput = document.getElementById(input.id + 'ID'),
+                        inputValue = input.value;
+                    hiddenInput.value = "";
+
+                    for (var i = 0; i < options.length; i++) {
+                        var option = options[i];
+
+                        if (option.innerText === inputValue) {
+                            hiddenInput.value = option.getAttribute('data-value');
+                        }
+                    }
+                });
+            });
+
+            $('#Inicio').datepicker({
+                format: 'd/m/Y H:i',
+                lang: 'pt-BR',
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: '>>',
+                prevText: '<<',
+                mask: '99/99/9999 99:99',
+                onClose: function () {
+                    try {
+                        $(this).valid();
+                    }
+                    catch (e) {
+                    }
+                }
+            });
+
+            $('#Admissao').datepicker({
+                format: 'd/m/Y H:i',
+                lang: 'pt-BR',
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: '>>',
+                prevText: '<<',
+                mask: '99/99/9999 99:99',
+                onClose: function () {
+                    try {
+                        $(this).valid();
+                    }
+                    catch (e) {
+                    }
+                }
+            });
+
+            $('#Demissao').datepicker({
+                format: 'd/m/Y H:i',
+                lang: 'pt-BR',
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: '>>',
+                prevText: '<<',
+                mask: '99/99/9999 99:99',
+                onClose: function () {
+                    try {
+                        $(this).valid();
+                    }
+                    catch (e) {
+                    }
+                }
+            });
+
+        })
+    </script>
+}

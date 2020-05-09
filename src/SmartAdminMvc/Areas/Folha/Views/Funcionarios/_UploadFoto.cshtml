@@ -1,0 +1,76 @@
+﻿@model EntityFrameworkFolha.FoPagAux.Entidades.Funcionario
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<div id="content">
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>Upload de Fotos </h2>
+                    </header>
+                    <div>
+                        <div class="jarviswidget-editbox">
+                        </div>
+
+                        <div class="widget-body">
+                            @using (Html.BeginForm("UploadFoto", "Funcionarios", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => model.FuncionarioID);
+                                @Html.ValidationSummary(true)
+
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <ul class="list-unstyled" style="padding-left: 20px;">
+                                            <li>
+                                                <p class="text-muted">
+                                                    <i class="fa fa-arrow-circle-o-right"></i>&nbsp;&nbsp; Nome: <span class="txt-color-darken">@Html.DisplayFor(model => model.Nome)</span>
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <p class="text-muted">
+                                                    <i class="fa fa-arrow-circle-o-right"></i>&nbsp;&nbsp; CPF: <span class="txt-color-darken">@Html.DisplayFor(model => model.CPF)</span>
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <p class="text-muted">
+                                                    <i class="fa fa-arrow-circle-o-right"></i>&nbsp;&nbsp; Imagem Atual: <span class="txt-color-darken">
+                                                        @{
+                                                            var caminhoImg = "~/Content/img/avatars/male.png";
+                                                            if (!String.IsNullOrEmpty(@Model.Foto))
+                                                            {
+                                                                caminhoImg = @Model.Foto;
+                                                            }
+
+                                                        }
+                                                        <img src="@Url.Content(caminhoImg)" height="90" />
+                                                    </span>
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <input type="file" name="file" id="file" />
+                                            </li>
+                                        </ul>
+                                        <footer>
+                                            <section class="col col-9">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Salvar
+                                                </button>
+                                            </section>
+                                        </footer>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+<!-- END MAIN CONTENT -->

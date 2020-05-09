@@ -1,0 +1,113 @@
+﻿<!-- new widget -->
+<div class="jarviswidget jarviswidget-color-blue" id="wid-id-13"
+     data-widget-load="/home/escalas/?AlocacaoID=@ViewBag.AlocacaoID&mes=@DateTime.Now.Month"
+     data-widget-colorbutton="false"
+     data-widget-editbutton="false"
+     data-widget-togglebutton="false"
+     data-widget-deletebutton="false"
+     data-widget-fullscreenbutton="false"
+     data-widget-custombutton="false"
+     data-widget-refreshbutton="true">
+    <!-- widget options:
+        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+        data-widget-colorbutton="false"
+        data-widget-editbutton="false"
+        data-widget-togglebutton="false"
+        data-widget-deletebutton="false"
+        data-widget-fullscreenbutton="false"
+        data-widget-custombutton="false"
+        data-widget-collapsed="true"
+        data-widget-sortable="false"
+
+    -->
+    <header>
+        <span class="widget-icon"> <i class="fa fa-calendar txt-color-white"></i> </span>
+        <h2> Controle de Escalas </h2>
+        <div class="widget-toolbar">
+            <!-- add: non-hidden - to disable auto hide -->
+
+            <div class="btn-group">
+
+            </div>
+        </div>
+    </header>
+
+    <!-- widget div-->
+    <div>
+
+        <!-- widget edit box -->
+        <div class="jarviswidget-editbox">
+            <!-- This area used as dropdown edit box -->
+
+        </div>
+        <!-- end widget edit box -->
+        <!-- widget content -->
+        <div class="widget-body">
+
+            <!-- widget body text-->
+
+            <p>Aguarde, carregando...</p>
+
+            <!-- end widget body text-->
+
+        </div>
+        <!-- end widget content -->
+        <div class="widget-rodape">
+            @{Html.RenderAction("ListaRelatorioAlocacao"); }
+        </div>
+    </div>
+    <!-- end widget div -->
+
+</div>
+
+<!-- new widget destalhes funcionario-->
+<div class="jarviswidget jarviswidget-color-blue" id="wid-id-detalhes-funcionario"
+     data-widget-colorbutton="false"
+     data-widget-editbutton="false"
+     data-widget-togglebutton="false"
+     data-widget-deletebutton="false"
+     data-widget-fullscreenbutton="false"
+     data-widget-custombutton="false"
+     data-widget-refreshbutton="false">
+    <header>
+        <span class="widget-icon"> <i class="fa fa-calendar txt-color-white"></i> </span>
+        <h2> Detalhes do Funcionário </h2>
+        <div class="widget-toolbar">
+            <!-- add: non-hidden - to disable auto hide -->
+
+            <div class="btn-group">
+
+            </div>
+        </div>
+    </header>
+
+    <!-- widget div-->
+    <div>
+
+        <!-- widget edit box -->
+        <div class="jarviswidget-editbox">
+            <!-- This area used as dropdown edit box -->
+
+        </div>
+        <!-- end widget edit box -->
+        <!-- widget content -->
+        <div class="widget-body">
+
+            <!-- widget body text-->
+            <div id="containerFuncionario">
+
+            </div>
+
+
+            <!-- end widget body text-->
+
+        </div>
+        <!-- end widget content -->
+        <div class="widget-rodape">
+
+        </div>
+    </div>
+    <!-- end widget div -->
+
+</div>

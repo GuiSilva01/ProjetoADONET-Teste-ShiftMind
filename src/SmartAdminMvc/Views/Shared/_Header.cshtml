@@ -1,0 +1,103 @@
+﻿    <!-- HEADER -->
+<header id="header">
+    <div id="logo-group">
+
+        <!-- PLACE YOUR LOGO HERE -->
+        <span id="logo"> <img src="~/Content/img/logo.png" alt="FolhaFlex"> </span>
+        <!-- END LOGO PLACEHOLDER -->
+        @if (false && Request.IsAuthenticated)
+        {
+            <!-- Note: The activity badge color changes when clicked and resets the number to 0
+            Suggestion: You may want to set a flag when this happens to tick off all checked messages / notifications -->
+            <span id="activity" class="activity-dropdown"> <i class="fa fa-user"></i> <b class="badge"> 21 </b> </span>
+
+            <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
+            <div class="ajax-dropdown">
+
+                <!-- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
+                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                    <label class="btn btn-default">
+                        <input type="radio" name="activity" id="~/Folha/Mensagens">
+                        Mensagens
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="activity" id="~/Content/ajax/notify/notifications.html">
+                        notificação (3)
+                    </label>
+                    <label class="btn btn-default">
+                        <input type="radio" name="activity" id="~/Content/ajax/notify/tasks.html">
+                        tarefas (4)
+                    </label>
+                </div>
+
+                <!-- notification content -->
+                <div class="ajax-notifications custom-scroll">
+
+                    <div class="alert alert-transparent">
+                        <h4>Clique nos botões para exibir a mensagem aqui</h4>
+                        A primeira mensagem é em branco para preservar sua privacidade.
+                    </div>
+
+                    <i class="fa fa-lock fa-4x fa-border"></i>
+
+                </div>
+                <!-- end notification content -->
+                <!-- footer: refresh area -->
+                <span>
+                    Útima atualização: @DateTime.Now.ToShortDateString()
+                    <button type="button" data-loading-text="<i class='fa fa-refresh fa-spin'></i> Carregando..." class="btn btn-xs btn-default pull-right">
+                        <i class="fa fa-refresh"></i>
+                    </button>
+                </span>
+                <!-- end footer -->
+
+            </div>
+            <!-- END AJAX-DROPDOWN -->
+        }
+    </div>
+    @if (Request.IsAuthenticated)
+    {
+        <!-- projects dropdown -->
+        <!--<div class="project-context hidden-xs">
+
+            <span class="label">Projetos:</span>
+            <span class="project-selector dropdown-toggle" data-toggle="dropdown">Projetos recentes <i class="fa fa-angle-down"></i></span>
+
+            <!-- Suggestion: populate this list with fetch and push technique
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="javascript:void(0);">Sistema de Vendas - integração com iOS</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">Notas de atualização</a>
+                </li>
+                <li>
+                    <a href="javascript:void(0);">Termos de uso</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="javascript:void(0);"><i class="fa fa-power-off"></i> Limpar</a>
+                </li>
+            </ul>
+            </div>
+
+
+        < !-- end dropdown-menu-->
+
+        <!-- end projects dropdown -->
+    }
+    <section id="top-right">
+        @if (@Model is HelperResult)
+        {
+            @Model
+        }
+        else
+        {
+            <div class="pull-right">
+                
+                @Html.Partial("_TopRight")
+            </div>
+        }
+    </section>
+</header>
+<!-- END HEADER -->

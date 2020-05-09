@@ -1,0 +1,348 @@
+﻿@model EntityFrameworkFolha.FoPagAux.Entidades.Funcionario
+
+<!-- new widget -->
+<div class="jarviswidget jarviswidget-color-blueDark"
+     id="wid-id-1001"
+     data-widget-editbutton="false"
+     data-widget-fullscreenbutton="false">
+    <header>
+        <span class="widget-icon"> <i class="fa fa-comments txt-color-white"></i> </span>
+        <h2> Detalhes do Funcionário </h2>
+        <div class="widget-toolbar">
+            <!-- add: non-hidden - to disable auto hide -->
+            <!--
+            <div class="btn-group">
+                <button class="btn dropdown-toggle btn-xs btn-success" data-toggle="dropdown">
+                    Status <i class="fa fa-caret-down"></i>
+                </button>
+                <ul class="dropdown-menu pull-right js-status-update">
+                    <li>
+                        <a href="javascript:void(0);"><i class="fa fa-circle txt-color-green"></i> Falta</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);"><i class="fa fa-circle txt-color-red"></i> Folga Trabalhada</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);"><i class="fa fa-circle txt-color-orange"></i> Férias</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="javascript:void(0);"><i class="fa fa-power-off"></i> Folga</a>
+                    </li>
+                </ul>
+            </div>
+            -->
+        </div>
+    </header>
+
+    <!-- widget div-->
+    <div>
+        <!-- widget edit box -->
+        <div class="jarviswidget-editbox">
+            <div>
+                <label>Usuário:</label>
+                <input type="text" />
+            </div>
+        </div>
+        <!-- end widget edit box -->
+
+        <div class="widget-body widget-hide-overflow no-padding">
+            <!-- content goes here -->
+            <!-- MAIN CONTENT -->
+            <div id="content">
+
+                <!-- Bread crumb is created dynamically -->
+                <!-- row cabeçalho -->
+                <div class="row">
+
+                    <!-- col -->
+                    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                        <h1 class="page-title txt-color-blueDark">
+                            <!-- PAGE HEADER -->
+                            <i class="fa-fw fa fa-file-o"></i> @Html.DisplayFor(model => model.Nome)
+                        </h1>
+                    </div>
+                    <!-- end col -->
+                    <!-- right side of the page with the sparkline graphs -->
+                    <!-- col -->
+                    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+                        <!-- sparks -->
+                        <!-- end sparks -->
+                    </div>
+                    <!-- end col -->
+
+                </div>
+                <!-- end row -->
+                <!-- row -->
+                <div class="row">
+                    <!--<div class="col-sm-12">-->
+                    <div class="well well-light well-sm no-margin no-padding">
+                        <div id="row">
+                            <!-- coluna esquerda dados e tabs-->
+                            <div class="col-sm-12 col-md-12 col-lg-6">
+                                <div class="well well-light well-sm no-margin no-padding">
+                                    <!-- Dados funcionario-->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div id="myCarousel" class="carousel fade profile-carousel">
+                                                <div class="carousel-inner">
+                                                    <div class="item active">
+                                                        <img src="/Content/img/demo/s1.jpg" alt="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-sm-3 profile-pic">
+                                                    @{
+                                                        var caminhoImg = "../content/img/avatars/male.png";
+                                                        if (Model != null && !String.IsNullOrEmpty(Model.Foto))
+                                                        {
+                                                            caminhoImg = Model.Foto;
+                                                        }
+                                                    }
+                                                    <img src="@caminhoImg" />
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <h1>
+                                                        @Html.DisplayFor(model => model.Nome)
+                                                        <br /><br />
+                                                    </h1>
+                                                    <ul class="list-unstyled">
+                                                        <li>
+                                                            <p class="text-muted">
+                                                                <i>Cargo:</i>&nbsp;&nbsp;@Html.DisplayFor(model => model.Cargo.Nome)
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="text-muted">
+                                                                <i>Empresa:</i>&nbsp;&nbsp;@Html.DisplayFor(model => model.Empresa.Nome)
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="text-muted">
+                                                                <i>Matrícula:</i>&nbsp;&nbsp;@Html.DisplayFor(model => model.Matricula)
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="text-muted">
+                                                                <i>CPF:</i>&nbsp;&nbsp;@Html.DisplayFor(model => model.CPF)
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="text-muted">
+                                                                <i>Início:</i>&nbsp;&nbsp;
+                                                                @if (Model != null && Model.Inicio.HasValue)
+                                                                {
+                                                                    @Model.Inicio.Value.ToString("dd/MM/yyyy");
+                                                                }
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="text-muted">
+                                                                <i>Admissão:</i>&nbsp;&nbsp;
+                                                                @if (Model != null && Model.Admissao.HasValue)
+                                                                {
+                                                                    @Model.Admissao.Value.ToString("dd/MM/yyyy");
+                                                                }
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="text-muted">
+                                                                <i>Demissão:</i>&nbsp;&nbsp;
+                                                                @if (Model != null && Model.Demissao.HasValue)
+                                                                {
+                                                                    @Model.Demissao.Value.ToString("dd/MM/yyyy");
+                                                                }
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="text-muted">
+                                                                <i>Líder:</i>&nbsp;&nbsp;@Html.DisplayFor(model => model.Lider.Nome)
+                                                            </p>
+                                                        </li>
+                                                        <li>
+                                                            <p class="text-muted">
+                                                                <i>Salário:</i>&nbsp;&nbsp;@Html.DisplayFor(model => model.Salario.Nome)
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fim Dados Funcionario-->
+                                    <!-- Inicio tabs-->
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <hr>
+                                            <div class="tabs-left">
+                                                <ul class="nav nav-tabs tabs-left" id="nav-pills">
+                                                    <li class="active">
+                                                        <a href="#tab-r1" data-toggle="tab"><span class="badge bg-color-blueDark txt-color-white">12</span> <span style="color: #555;">Endereços</span> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab-r2" data-toggle="tab"><span class="badge bg-color-blueDark txt-color-white">3</span> <span style="color: #555;">Dependentes</span></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab-r3" data-toggle="tab"><span class="badge bg-color-blueDark txt-color-white">0</span> Atrasos</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab-r4" data-toggle="tab"><span class="badge bg-color-blueDark txt-color-white">1</span> Faltas</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab-r5" data-toggle="tab"><span class="badge bg-color-blueDark txt-color-white">0</span> Afastamentos</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab-r6" data-toggle="tab"><span class="badge bg-color-blueDark txt-color-white">0</span> Férias</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab-r7" data-toggle="tab"><span class="badge bg-color-blueDark txt-color-white">0</span> Banco</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab-r8" data-toggle="tab"><span class="badge bg-color-blueDark txt-color-white">0</span> Holerite</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab-r9" data-toggle="tab"><span class="badge bg-color-blueDark txt-color-white">0</span> Financeiro</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#tab-r10" data-toggle="tab"><span class="badge bg-color-blueDark txt-color-white">0</span> Disciplina</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="tab-r1">
+                                                        <p>
+                                                            Dear Math, please grow up and solve your own problems, I'm tired of solving them for you.
+                                                        </p>
+
+                                                        <p>
+                                                            They say that love is more important than money, but have you ever tried to pay your bills with a hug?
+                                                        </p>
+                                                    </div>
+                                                    <div class="tab-pane" id="tab-r2">
+                                                        <p>
+                                                            Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
+                                                        </p>
+                                                    </div>
+                                                    <div class="tab-pane" id="tab-r3">
+                                                        <p>
+                                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
+                                                        </p>
+                                                    </div>
+                                                    <div class="tab-pane" id="tab-r4">
+                                                        <p>
+                                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
+                                                        </p>
+                                                    </div>
+                                                    <div class="tab-pane" id="tab-r5">
+                                                        <p>
+                                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
+                                                        </p>
+                                                    </div>
+                                                    <div class="tab-pane" id="tab-r6">
+                                                        <p>
+                                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
+                                                        </p>
+                                                    </div>
+                                                    <div class="tab-pane" id="tab-r7">
+                                                        <p>
+                                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
+                                                        </p>
+                                                    </div>
+                                                    <div class="tab-pane" id="tab-r8">
+                                                        <p>
+                                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
+                                                        </p>
+                                                    </div>
+                                                    <div class="tab-pane" id="tab-r9">
+                                                        <p>
+                                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
+                                                        </p>
+                                                    </div>
+                                                    <div class="tab-pane" id="tab-r10">
+                                                        <p>
+                                                            Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Fim tabs-->
+                                </div>
+                            </div>
+                            <!-- coluna direita hitórico funcionário-->
+                            <div class="col-sm-12 col-md-12 col-lg-6">
+
+                                <form method="post" class="well padding-bottom-10" style="height: 125px;" onsubmit="return false;">
+                                    <textarea rows="2" class="form-control" placeholder="Digite aqui para inserir um novo item no histórico"></textarea>
+                                    <div class="margin-top-10">
+                                        <button type="submit" class="btn btn-sm btn-primary pull-right">
+                                            Inserir
+                                        </button>
+                                    </div>
+                                </form>
+
+                                @if (Model != null && Model.HistoricoFuncionario.Any())
+                                {
+                                    foreach (var historico in Model.HistoricoFuncionario)
+                                    {
+                                        <div class="timeline-seperator text-center">
+                                            <span>@historico.DataCriacao.ToString("dd/MM/yyyy HH:mm:ss")</span>
+                                            <div class="btn-group pull-right">
+                                                <a href="javascript:void(0);" data-toggle="dropdown" class="btn btn-default btn-xs dropdown-toggle"><span class="caret single"></span></a>
+                                                <ul class="dropdown-menu text-left">
+                                                    <li>
+                                                        <a href="javascript:void(0);">Excluir</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="chat-body no-padding profile-message">
+                                            <ul>
+                                                <li class="message">
+                                                    <img src="/Content/img/avatars/male.png" class="online" alt="sunny">
+                                                    <span class="message-text">
+                                                        @historico.DescricaoHistorico
+                                                    </span>
+                                                    <span class="message-text">
+                                                        @historico.Observacao
+                                                    </span>
+                                                    @*<ul class="list-inline font-xs">
+                                    <li>
+                                        <a href="javascript:void(0);" class="text-info"><i class="fa fa-reply"></i> Reply</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="text-danger"><i class="fa fa-thumbs-up"></i> Like</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="text-muted">Show All Comments (14)</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="text-primary">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" class="text-danger">Delete</a>
+                                    </li>
+                                </ul>*@
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!--</div>-->
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- END MAIN CONTENT -->
+            <!-- end content -->
+        </div>
+    </div>
+    <!-- end widget div -->
+</div>
+<!-- end widget -->

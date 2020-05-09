@@ -1,0 +1,158 @@
+﻿@model IEnumerable<EntityFrameworkFolha.FoPagAux.Entidades.GestaoEscala>
+@{
+    var dataAtual = DateTime.Now.Month;
+    if (ViewBag.Mes != null)
+    {
+        //]dataAtual = new DateTime
+    }
+}
+
+@if (Model.Count() > 0)
+{
+    <div id="content">
+        <div class="row">
+            <div class="col-xs-6 col-sm-7 col-md-7 col-lg-8">
+                <h1 class="page-title txt-color-blueDark">
+                    <i class="fa-fw fa fa-file-o"></i>  @Model.FirstOrDefault().- Alocacao de Serviço
+                </h1>
+            </div>
+            <div class="btn-group col-xs-6 col-sm-7 col-md-7 col-lg-4" style="text-align: right;">
+
+                <a href="javascript:void(0)" class="btn btn-default btn-xs" id=""><i class="fa fa-chevron-left"></i>Anterior</a>
+                <a href="javascript:void(0)" class="btn btn-default btn-xs" id="">Atual</a>
+                <a href="javascript:void(0)" class="btn btn-default btn-xs" id="">Próximo<i class="fa fa-chevron-right"></i></a>
+                @{Html.RenderAction("ListaAlocacaosAlocacao", "Home", new { AlocacaoID = ViewBag.AlocacaoID, Mes = ViewBag.Mes });}
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed smart-form has-tickbox">
+                @{
+                    var turnoIndex = 0;
+                    var mesBase = Model.FirstOrDefault().Mes;
+                    var anoBase = Model.FirstOrDefault().Ano;
+                    var diaInicial = Model.Min(x => x.Dia);
+                    var diaFinal = Model.Max(x => x.Dia);
+                    var dataBase = DateTime.Parse(anoBase + "-" + mesBase + "-01");
+                    var cellBgBase = "#fff1e6";
+                    foreach (var turno in Model.GroupBy(x => x.Funcionario.Nome))
+                    {
+                        <tr>
+                            <td class="TipoApontamentoOK">
+                                <span class="vertical-text"><strong>@turno.Key</strong></span>
+                            </td>
+                            <td>
+                                <table class="table table-bordered table-condensed table-hover smart-form has-tickbox">
+                                    <thead>
+                                        <tr>
+                                            <td colspan="3" style="background-color: @cellBgBase;  text-transform: capitalize;text-align: center; vertical-align: middle;">
+                                                <h3> @HtmlHelperExtensions.DTFT().GetMonthName(mesBase) / @anoBase </h3>
+                                            </td>
+                                            @for (var dia = diaInicial; dia <= diaFinal; dia++)
+                                            {
+                                                var diaSemana = HtmlHelperExtensions.DTFT().GetAbbreviatedDayName(DateTime.Parse(dia + "-" + mesBase + "-" + anoBase).DayOfWeek);
+                                                var cellBg = cellBgBase;
+
+                                                if (diaSemana.Contains("sáb") || diaSemana.Contains("dom"))
+                                                {
+                                                    cellBg = "#ff9a4d";
+                                                }
+
+                                                <td style="background-color: @cellBg;text-transform: capitalize;text-align: center; vertical-align: middle;">
+                                                    <strong>@diaSemana</strong>
+                                                </td>
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tr>
+                                        <td style="background-color: @cellBgBase;text-transform: capitalize;text-align: center; vertical-align: middle;"><strong>#</strong></td>
+                                        <td style="background-color: @cellBgBase;text-transform: capitalize;text-align: center; vertical-align: middle;"><strong>Postos</strong></td>
+                                        <td style="background-color: @cellBgBase;text-transform: capitalize;text-align: center; vertical-align: middle;"><strong>Funcionarios</strong></td>
+                                        @for (var dia = diaInicial; dia <= diaFinal; dia++)
+                                        {
+                                            var diaSemana = HtmlHelperExtensions.DTFT().GetAbbreviatedDayName(DateTime.Parse(dia + "-" + mesBase + "-" + anoBase).DayOfWeek);
+                                            var cellBg = cellBgBase;
+
+                                            if (diaSemana.Contains("sáb") || diaSemana.Contains("dom"))
+                                            {
+                                                cellBg = "#ff9a4d";
+                                            }
+
+                                            <td style="text-transform: uppercase;text-align: center;vertical-align: middle;background-color: @cellBg;"><strong>@dia</strong> </td>
+                                        }
+                                    </tr>
+
+                                    @foreach (var i in Model.Where(x => x.Funcionario.Nome == turno.Key).OrderBy(y => y.Funcionario.LiderID).GroupBy(z => z.FuncionarioID))
+                                    {
+                                        var funcionario = Model.Where(x => x.FuncionarioID == i.Key).FirstOrDefault().Funcionario;
+                                        <tr>
+                                            <td></td>
+                                            <td style="text-align: center;vertical-align: middle;text-transform: capitalize;">@funcionario.Cargo.Nome</td>
+                                            <td style="text-align: center;vertical-align: middle;text-transform: capitalize;">@funcionario.Nome</td>
+                                            @for (var dia = diaInicial; dia <= diaFinal; dia++)
+                                            {
+                                                var diaSemana = HtmlHelperExtensions.DTFT().GetAbbreviatedDayName(DateTime.Parse(dia + "-" + mesBase + "-" + anoBase).DayOfWeek);
+                                                var cellBg = "";
+
+                                                if (diaSemana.Contains("sáb") || diaSemana.Contains("dom"))
+                                                {
+                                                    cellBg = "#ff9a4d";
+                                                }
+                                                else
+                                                {
+                                                    cellBg = "#f7f7ba";
+                                                }
+
+                                                var saida = "";
+                                                var classeSaida = "";
+                                                var AlocacaoPeriodo = Model.Where(a => a.FuncionarioID == i.Key && a.Dia == dia).FirstOrDefault();
+                                                if (AlocacaoPeriodo.TipoApontamento != null)
+                                                {
+                                                    switch (AlocacaoPeriodo.TipoApontamento.Sigla)
+                                                    {
+                                                        case "OK":
+                                                            saida = "";
+                                                            classeSaida = "fa fa-circle";
+                                                            break;
+                                                        case "F":
+                                                            saida = "F";
+                                                            classeSaida = "";
+                                                            break;
+                                                        case "FT":
+                                                            saida = "FT";
+                                                            classeSaida = "";
+                                                            break;
+                                                        default:
+                                                            saida = "X";
+                                                            classeSaida = "";
+                                                            break;
+                                                    }
+
+                                                    <td style="background-color: @cellBg;text-transform: uppercase;text-align: center;vertical-align: middle;">
+                                                        <a href="folha/Alocacaoperiodo/edit/@AlocacaoPeriodo.GestaoEscalaID" class="btn btn-default btn-xs" style="background-color: transparent; width:100%;" id="@AlocacaoPeriodo.GestaoEscalaID">
+                                                            <i class="@classeSaida"></i>@saida
+                                                        </a>
+                                                    </td>
+                                                }
+
+                                            }
+                                        </tr>
+                                    }
+
+                                </table>
+                            </td>
+                        </tr>
+                        turnoIndex++;
+                    }
+                }
+            </table>
+        </div>
+    </div>
+    <!-- end content -->
+}
+@section pagespecific {
+    <script>
+        $(document).ready(function () {
+
+        })
+    </script>
+}

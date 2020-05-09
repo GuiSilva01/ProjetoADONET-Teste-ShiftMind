@@ -1,0 +1,694 @@
+﻿@model EntityFrameworkFolha.FoPagAux.Entidades.Funcionario
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+            <h1 class="page-title txt-color-blueDark">
+                <i class="fa-fw fa fa-pencil-square-o"></i>
+                Cadastros
+                <span>
+                    >
+                    Funcionários
+                </span>
+            </h1>
+        </div>
+    </div>
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-9">
+                <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+                    <header>
+                        <span class="widget-icon"><i class="fa fa-edit"></i></span>
+                        <h2>Dados do Funcionário</h2>
+                    </header>
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+
+                        <div class="widget-body no-padding">
+
+                            @using (Html.BeginForm("Edit", "Funcionarios", FormMethod.Post, new { id = "form", @class = "smart-form", novalidate = "novalidate" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#iss1" data-toggle="tab">Dados Principais</a>
+                                    </li>
+                                    <li>
+                                        <a href="#iss2" data-toggle="tab">Documentos</a>
+                                    </li>
+                                    <li>
+                                        <a href="#iss3" data-toggle="tab">Outros</a>
+                                    </li>
+                                    <li>
+                                        <a href="#iss4" data-toggle="tab">Arquivos</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content padding-10">
+                                    <div class="tab-pane active" id="iss1">
+                                        <fieldset>
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            @Html.HiddenFor(model => model.FuncionarioID)
+                                            @Html.HiddenFor(model => model.Foto)
+                                            @Html.HiddenFor(model => model.DataCriacao)
+                                            @Html.HiddenFor(model => model.UsuarioCriacao)
+                                            @Html.HiddenFor(model => model.DataAlteracao)
+                                            @Html.HiddenFor(model => model.UsuarioAlteracao)
+
+
+                                            <div class="row">
+                                                <section class="col col-1 right" style="min-width: 115px;">
+                                                    @{
+                                                        var caminhoImg = "/Content/img/avatars/male.png";
+                                                        if (Model != null && !String.IsNullOrEmpty(Model.Foto))
+                                                        {
+                                                            caminhoImg = Model.Foto;
+                                                        }
+                                                    }
+                                                    <img src="@Url.Content(caminhoImg)" width="112" style="padding-right: 3px;" />
+                                                </section>
+                                                <section class="col col-9">
+                                                    <label class="label">
+                                                        Matrícula / Número Interno
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.Matricula, new { htmlAttributes = new { @type = "text", @name = "Matricula", @placeholder = "", @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Matricula, "", new { @class = "text-danger" })
+                                                    </label>
+
+                                                    <label class="label">
+                                                        Nome
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @type = "text", @name = "Nome", @placeholder = "", @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Início
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.Inicio, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.Inicio, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Admissão
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.Admissao, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.Admissao, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Demissão
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.Demissao, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.Demissao, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Data Nascimento
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Sexo
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.Sexo, (SelectList)ViewBag.SexoList)
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Estado Civil
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.EstadoCivil, (SelectList)ViewBag.EstadoCivilList)
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.EstadoCivil, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-9">
+                                                    <label class="label">
+                                                        Nome do Cônjuge
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.NomeConjuge, new { htmlAttributes = new { @type = "text", @name = "NomeConjuge", @placeholder = "", @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.NomeConjuge, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-9">
+                                                    <label class="label">
+                                                        Nome da Mãe
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.NomeMae, new { htmlAttributes = new { @type = "text", @name = "NomeMae", @placeholder = "", @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.NomeMae, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-9">
+                                                    <label class="label">
+                                                        Nome do Pai
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.NomePai, new { htmlAttributes = new { @type = "text", @name = "NomePai", @placeholder = "", @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.NomePai, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Escala/Horário
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.EscalaHorario, new { htmlAttributes = new { @type = "text", @name = "EscalaHorario", @placeholder = "", @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.EscalaHorario, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Telefone Celular
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.TelefoneCelular, new { htmlAttributes = new { @type = "text", @name = "TelefoneCelular", @placeholder = "Telefone Celular", @class = "form-control", @data_mask = "(00) 00000-0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.TelefoneCelular, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Telefone Residencial
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.TelefoneResidencial, new { htmlAttributes = new { @type = "text", @name = "TelefoneResidencial", @placeholder = "", @class = "form-control", @data_mask = "(00) 0000-0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.TelefoneResidencial, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        1° Empresa registro
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.EmpresaID, (SelectList)ViewBag.Empresa)
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.EmpresaID, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        2° Empresa registro
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.Empresa2ID, (SelectList)ViewBag.Empresa2, "Selecione se necessário")
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.Empresa2ID, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        3° Empresa registro
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.Empresa3ID, (SelectList)ViewBag.Empresa3, "Selecione se necessário")
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.Empresa3ID, "", new { @class = "text-danger" })
+                                                </section>
+
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Posto de trabalho da 1° Empresa
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.PostoTrabalhoID, (SelectList)ViewBag.PostoTrabalho)
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.PostoTrabalhoID, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Posto de trabalho da 2° Empresa
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.PostoTrabalho2ID, (SelectList)ViewBag.PostoTrabalho2, "Selecione se necessário")
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.PostoTrabalho2ID, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Posto de trabalho da 3° Empresa
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.PostoTrabalho3ID, (SelectList)ViewBag.PostoTrabalho3, "Selecione se necessário")
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.PostoTrabalho3ID, "", new { @class = "text-danger" })
+                                                </section>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="tab-pane fade" id="iss2">
+                                        <fieldset>
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Data Exame Admissional
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.DataExameAdmissional, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.DataExameAdmissional, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Título de Eleitor
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.TituloEleitor, new { htmlAttributes = new { @type = "text", @name = "TituloEleitor", @placeholder = "", @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.TituloEleitor, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        PIS
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.PIS, new { htmlAttributes = new { @type = "text", @name = "PIS", @placeholder = "", @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.PIS, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        RG
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.RG, new { htmlAttributes = new { @type = "text", @name = "RG", @placeholder = "", @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.RG, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Naturalidade
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.Naturalidade, new { htmlAttributes = new { @type = "text", @name = "Naturalidade", @placeholder = "", @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.Naturalidade, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Data Emissão RG
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.DataEmissaoRG, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.DataEmissaoRG, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Orgão Expedidor RG
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.OrgaoExpedidorRG, new { htmlAttributes = new { @type = "text", @name = "OrgaoExpedidorRG", @placeholder = "", @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.OrgaoExpedidorRG, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Estado Expedidor RG
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.EstadoExpedidorRG, (SelectList)ViewBag.UfList)
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.EstadoExpedidorRG, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        CPF
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @type = "text", @name = "CPF", @placeholder = "", @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        CTPS
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.CTPS, new { htmlAttributes = new { @type = "text", @name = "CTPS", @placeholder = "", @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.CTPS, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Data Expedição CTPS
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.DataExpedicaoCTPS, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.DataExpedicaoCTPS, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="tab-pane fade" id="iss3">
+                                        <fieldset>
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Lider
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.LiderID, (SelectList)ViewBag.Lider, "Selecione se necessário")
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.LiderID, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label class="label">
+                                                        É Líder?
+                                                    </label>
+                                                    <label class="checkbox">
+                                                        @Html.CheckBoxFor(model => model.Lideranca)
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.Lideranca, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label class="label">
+                                                        Faixa Salarial
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.SalarioID, (SelectList)ViewBag.Salario, "Selecione se necessário")
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.SalarioID, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Cargo
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.CargoID, (SelectList)ViewBag.Cargo, "Selecione se necessário")
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.CargoID, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-6">
+                                                    <label class="label">
+                                                        Email
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-mail-forward"></i>
+                                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @type = "text", @name = "Email", @placeholder = "", @class = "form-control" } })
+
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-6">
+                                                    <label class="label">
+                                                        Rede Social
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-facebook"></i>
+                                                        @Html.EditorFor(model => model.RedeSocial, new { htmlAttributes = new { @type = "text", @name = "RedeSocial", @placeholder = "", @class = "form-control" } })
+
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.RedeSocial, "", new { @class = "text-danger" })
+                                                </section>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div id="iss4" class="tab-pane fade">
+                                        <fieldset>
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    @foreach (var image in (IEnumerable<string>)ViewBag.Images)
+                                                    {
+                                                        <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <ul class="list-unstyled" style="padding-left: 20px;">
+                                                                    <li>
+                                                                        <p class="text-muted" style="margin-top: 10px; background-color: aliceblue;">
+                                                                            <i class="fa fa-arrow-circle-o-right"></i>
+                                                                            @if (image.Contains("jpg") || image.Contains("png") || image.Contains("jpeg"))
+                                                                            {                                                                                
+                                                                                <a href="@Url.Content(image)" target="_blank" style="padding: 10px;">
+                                                                                    @image.Split('/')[3]
+                                                                                    <img src="@Url.Content(image)" style="max-width: 900px;" />
+                                                                                </a>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <a href="@Url.Content(image)" target="_blank" style="padding: 10px;">@image.Split('/')[3]</a>
+                                                                            }
+                                                                        </p>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                </section>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <footer>
+                                        <button type="button" class="btn btn-primary">
+                                            Editar
+                                        </button>
+                                        <button type="button" class="btn btn-primary">
+                                            Imprimir
+                                        </button>
+                                    </footer>
+                                </div>
+                            }
+                        </div>
+                    </div>
+            </article>
+        </div>
+    </section>
+
+</div>
+
+@section pagespecific {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            document.querySelectorAll('input[list]').forEach(function (x, y, z) {
+                x.addEventListener('input', function (e) {
+                    var input = e.target,
+                        list = input.getAttribute('list'),
+                        options = document.querySelectorAll('#' + list + ' option'),
+                        hiddenInput = document.getElementById(input.id + 'ID'),
+                        inputValue = input.value;
+                    hiddenInput.value = "";
+
+                    for (var i = 0; i < options.length; i++) {
+                        var option = options[i];
+
+                        if (option.innerText === inputValue) {
+                            hiddenInput.value = option.getAttribute('data-value');
+                        }
+                    }
+                });
+            });
+
+            $('#Inicio').datepicker({
+                format: 'd/m/Y H:i',
+                lang: 'pt-BR',
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: '>>',
+                prevText: '<<',
+                mask: '99/99/9999 99:99',
+                onClose: function () {
+                    try {
+                        $(this).valid();
+                    }
+                    catch (e) {
+                    }
+                }
+            });
+
+            $('#Admissao').datepicker({
+                format: 'd/m/Y H:i',
+                lang: 'pt-BR',
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: '>>',
+                prevText: '<<',
+                mask: '99/99/9999 99:99',
+                onClose: function () {
+                    try {
+                        $(this).valid();
+                    }
+                    catch (e) {
+                    }
+                }
+            });
+
+            $('#Demissao').datepicker({
+                format: 'd/m/Y H:i',
+                lang: 'pt-BR',
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: '>>',
+                prevText: '<<',
+                mask: '99/99/9999 99:99',
+                onClose: function () {
+                    try {
+                        $(this).valid();
+                    }
+                    catch (e) {
+                    }
+                }
+            });
+
+            $('#DataNascimento').datepicker({
+                format: 'd/m/Y H:i',
+                lang: 'pt-BR',
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: '>>',
+                prevText: '<<',
+                mask: '99/99/9999 99:99',
+                onClose: function () {
+                    try {
+                        $(this).valid();
+                    }
+                    catch (e) {
+                    }
+                }
+            });
+
+            $('#DataExameAdmissional').datepicker({
+                format: 'd/m/Y H:i',
+                lang: 'pt-BR',
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: '>>',
+                prevText: '<<',
+                mask: '99/99/9999 99:99',
+                onClose: function () {
+                    try {
+                        $(this).valid();
+                    }
+                    catch (e) {
+                    }
+                }
+            });
+
+            $('#DataEmissaoRG').datepicker({
+                format: 'd/m/Y H:i',
+                lang: 'pt-BR',
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: '>>',
+                prevText: '<<',
+                mask: '99/99/9999 99:99',
+                onClose: function () {
+                    try {
+                        $(this).valid();
+                    }
+                    catch (e) {
+                    }
+                }
+            });
+
+            $('#DataExpedicaoCTPS').datepicker({
+                format: 'd/m/Y H:i',
+                lang: 'pt-BR',
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: '>>',
+                prevText: '<<',
+                mask: '99/99/9999 99:99',
+                onClose: function () {
+                    try {
+                        $(this).valid();
+                    }
+                    catch (e) {
+                    }
+                }
+            });
+
+        })
+    </script>
+}

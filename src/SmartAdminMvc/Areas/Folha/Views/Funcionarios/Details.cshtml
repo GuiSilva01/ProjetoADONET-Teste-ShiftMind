@@ -1,0 +1,522 @@
+﻿@model EntityFrameworkFolha.FoPagAux.Entidades.Funcionario
+<!-- MAIN CONTENT -->
+<div id="content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="well well-sm">
+                <div class="row">
+                    <!-- dados -->
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="well well-light well-sm no-margin no-padding">
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div id="myCarousel" class="carousel fade profile-carousel">
+                                        <div class="carousel-inner">
+                                            <!-- Slide 1 -->
+                                            <div class="item active">
+                                                <img src="/Content/img/demo/s1.jpg" alt="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- add histórico -->
+                                <div class="col-sm-6 col-md-6 col-lg-6 well" >
+                                    <form method="post" class="" id="novoHistorico" name="novoHistorico" action="#">
+                                        <input type="hidden" id="FuncionarioID" name="FuncionarioID" value="@Model.FuncionarioID" />
+                                        <textarea rows="3" class="form-control" placeholder="" id="DescricaoHistorico" name="DescricaoHistorico"></textarea>                                        
+                                    </form>
+                                    <button type="submit" class="btn btn-sm btn-primary pull-right" id="btnAddHistorico">Adicionar Observações</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <!-- PIC -->
+                                    <div class="col-sm-2 profile-pic">
+                                        @{
+                                            var caminhoImg = "/Content/img/avatars/male.png";
+                                            if (Model != null && !String.IsNullOrEmpty(Model.Foto))
+                                            {
+                                                caminhoImg = Model.Foto;
+                                            }
+
+                                            var qtdFaltas = (List<EntityFrameworkFolha.FoPagAux.Entidades.Falta>)ViewBag.qtdFaltas;
+                                            var qtdFts = (List<EntityFrameworkFolha.FoPagAux.Entidades.Falta>)ViewBag.qtdFts;
+                                            var qtdAtrasos = (List<EntityFrameworkFolha.FoPagAux.Entidades.Atraso>)ViewBag.qtdAtrasos;
+                                            var qtdBH = ViewBag.qtdBH;
+                                            var qtdHE = ViewBag.qtdHE;
+
+                                        }
+                                        <img src="@Url.Content(caminhoImg)" width="90" />
+                                        <div class="padding-10">
+                                            <h4 class="font-md">
+                                                <strong>@qtdFaltas.Count</strong>
+                                                <br>
+                                                <small>Faltas</small>
+                                            </h4>
+                                            <br>
+                                            <h4 class="font-md">
+                                                <strong>@qtdFts.Count</strong>
+                                                <br>
+                                                <small>FT</small>
+                                            </h4>
+                                            <br>
+                                            <h4 class="font-md">
+                                                <strong>@qtdAtrasos.Count</strong>
+                                                <br>
+                                                <small>Atrasos</small>
+                                            </h4>
+                                            <br>
+                                            <h4 class="font-md">
+                                                <strong>@qtdBH</strong>
+                                                <br>
+                                                <small>Banco de Horas</small>
+                                            </h4>
+                                            <br>
+                                            <h4 class="font-md">
+                                                <strong>@qtdHE</strong>
+                                                <br>
+                                                <small>Horas Extras</small>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                    <!-- DADOS-->
+                                    <div class="col-sm-10">
+                                        <ul class="nav nav-tabs" style="padding-top: 5px;">
+                                            <li class="active">
+                                                <a href="#iss1" data-toggle="tab">Dados Principais</a>
+                                            </li>
+                                            <li>
+                                                <a href="#iss4" data-toggle="tab">Arquivos</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content padding-10" style="min-height: 550px;">
+                                            <div class="tab-pane active" id="iss1">
+                                                <h1>
+                                                    @Html.DisplayFor(model => model.Nome) <span class="semi-bold"></span>
+                                                </h1>
+                                                <a class="btn btn-sm btn-primary pull-right" href="/folha/funcionarios/edit/@Model.FuncionarioID">
+                                                    Editar
+                                                </a>
+                                                <h1>
+                                                    <small>Empresa: @Html.DisplayFor(model => model.Empresa.Nome)</small>
+                                                </h1>
+                                                <h1>
+                                                    <small>Posto de Trabalho: @Html.DisplayFor(model => model.PostoTrabalho.Nome)</small>
+                                                </h1>
+                                                <h1>
+                                                    <small>Cargo: @Html.DisplayFor(model => model.Cargo.Nome)</small>
+                                                </h1>
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        <p class="text-muted">
+                                                            <i class="fa fa-arrow-circle-o-right"></i>&nbsp;&nbsp; RG: <span class="txt-color-darken">@Html.DisplayFor(model => model.RG)</span>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="text-muted">
+                                                            <i class="fa fa-arrow-circle-o-right"></i>&nbsp;&nbsp; CPF: <span class="txt-color-darken">@Html.DisplayFor(model => model.CPF)</span>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="text-muted">
+                                                            <i class="fa fa-arrow-circle-o-right"></i>&nbsp;&nbsp; CTPS: <span class="txt-color-darken">@Html.DisplayFor(model => model.CTPS)</span>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="text-muted">
+                                                            <i class="fa fa-arrow-circle-o-right"></i>&nbsp;&nbsp; PIS: <span class="txt-color-darken">@Html.DisplayFor(model => model.PIS)</span>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="text-muted">
+                                                            <i class="fa fa-arrow-circle-o-right"></i>&nbsp;&nbsp; Matrícula: <span class="txt-color-darken">@Html.DisplayFor(model => model.Matricula)</span>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="text-muted">
+                                                            <i class="fa fa-phone"></i>&nbsp;&nbsp; Tel. Residencial: <span class="txt-color-darken">@Html.DisplayFor(model => model.TelefoneResidencial)</span>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="text-muted">
+                                                            <i class="fa fa-phone"></i>&nbsp;&nbsp; Tel. Celular: <span class="txt-color-darken">@Html.DisplayFor(model => model.TelefoneCelular)</span>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="text-muted">
+                                                            <i class="fa fa-envelope"></i>&nbsp;&nbsp; Email: <a href="#">@Html.DisplayFor(model => model.Email)</a>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="text-muted">
+                                                            <i class="fa fa-facebook-square"></i>&nbsp;&nbsp; Rede Social: <span class="txt-color-darken">@Html.DisplayFor(model => model.RedeSocial)</span>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="text-muted">
+                                                            <i class="fa fa-calendar"></i>&nbsp;&nbsp;
+                                                            <span class="txt-color-darken">
+                                                                Início: @if (Model != null && Model.Inicio.HasValue)
+                                                                {@Model.Inicio.Value.ToString("dd/MM/yyyy");
+                                                            }
+                                                            </span>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="text-muted">
+                                                            <i class="fa fa-calendar"></i>&nbsp;&nbsp;
+                                                            <span class="txt-color-darken">
+                                                                Admissão: @if (Model != null && Model.Admissao.HasValue)
+                                                                {@Model.Admissao.Value.ToString("dd/MM/yyyy");
+                                                            }
+                                                            </span>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="text-muted">
+                                                            <i class="fa fa-calendar"></i>&nbsp;&nbsp;<span class="txt-color-darken">
+                                                                Demissão: @if (Model != null && Model.Demissao.HasValue)
+                                                                {@Model.Demissao.Value.ToString("dd/MM/yyyy");
+                                                            }
+                                                            </span>
+                                                        </p>
+                                                    </li>
+                                                    <li>
+                                                        <p class="text-muted">
+                                                            <i class="fa fa-user"></i>&nbsp;&nbsp; Líder: <span class="txt-color-darken">@Html.DisplayFor(model => model.Lider.Nome)</span>
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                                <br>
+                                            </div>
+                                            <div class="tab-pane" id="iss4">
+                                                @foreach (var image in (IEnumerable<string>)ViewBag.Images)
+                                                {
+                                                    <ul class="list-unstyled" style="padding-left: 20px;">
+                                                        <li>
+                                                            <p class="text-muted" style="margin-top: 10px; background-color: aliceblue;">
+                                                                <i class="fa fa-arrow-circle-o-right"></i>
+                                                                @if (image.Contains("jpg") || image.Contains("png") || image.Contains("jpeg"))
+                                                                {
+                                                                    <a href="@Url.Content(image)" target="_blank" style="padding: 10px;">
+                                                                        @image.Split('/')[3]
+                                                                        <img src="@Url.Content(image)" style="max-width: 250px;" />
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="@Url.Content(image)" target="_blank" style="padding: 10px;">@image.Split('/')[3]</a>
+                                                                }
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div id="containerHistorico" style="max-height: 550px; overflow: auto;">
+                                        @{ Html.RenderAction("ListaHistoricos", "HistoricoFuncionarios", new { Id = Model.FuncionarioID, Area = "Folha" });}
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- Tabs -->
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <hr>
+                                        <div class="padding-10">
+                                            <ul class="nav nav-tabs tabs-pull-right">
+                                                <li class="active">
+                                                    <a href="#tab-r1" data-toggle="tab">
+                                                        <span class="badge bg-color-blueDark txt-color-white"></span>
+                                                        <span style="color: #555;">Endereços</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#tab-r2" data-toggle="tab">
+                                                        <span class="badge bg-color-blueDark txt-color-white"></span>
+                                                        <span style="color: #555;">Dependentes</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#tab-r3" data-toggle="tab">
+                                                        <span class="badge bg-color-blueDark txt-color-white"></span>
+                                                        <span style="color: #555;">Atrasos</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#tab-r12" data-toggle="tab">
+                                                        <span class="badge bg-color-blueDark txt-color-white"></span>
+                                                        <span style="color: #555;">Ausências</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#tab-r4" data-toggle="tab">
+                                                        <span class="badge bg-color-blueDark txt-color-white"></span>
+                                                        <span style="color: #555;">Faltas</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#tab-r5" data-toggle="tab">
+                                                        <span class="badge bg-color-blueDark txt-color-white"></span>
+                                                        <span style="color: #555;">Afastamentos</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#tab-r6" data-toggle="tab">
+                                                        <span class="badge bg-color-blueDark txt-color-white"></span>
+                                                        <span style="color: #555;">Férias</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#tab-r7" data-toggle="tab">
+                                                        <span class="badge bg-color-blueDark txt-color-white"></span>
+                                                        <span style="color: #555;">Dados Bancários</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#tab-r8" data-toggle="tab">
+                                                        <span class="badge bg-color-blueDark txt-color-white"></span>
+                                                        <span style="color: #555;">Holerite</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#tab-r9" data-toggle="tab">
+                                                        <span class="badge bg-color-blueDark txt-color-white"></span>
+                                                        <span style="color: #555;">Financeiro</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#tab-r10" data-toggle="tab">
+                                                        <span class="badge bg-color-blueDark txt-color-white"></span>
+                                                        <span style="color: #555;">Advertências/Suspensões</span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#tab-r11" data-toggle="tab">
+                                                        <span class="badge bg-color-blueDark txt-color-white"></span>
+                                                        <span style="color: #555;">Banco de horas/FTs/Hora Extra</span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content padding-top-10" style="min-height: 120px;">
+                                                <div class="tab-pane fade in active" id="tab-r1">
+                                                    <div class="row">
+                                                        @{ Html.RenderAction("ListaEnderecosFucionarios", "Enderecos", new { id = Model.FuncionarioID, Area = "Folha" }); }
+
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-primary pull-right" id="addEndereco">
+                                                        Adicionar Endereço
+                                                    </button>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab-r2">
+                                                    <div class="row">
+                                                        @{ Html.RenderAction("ListaDependentesFucionarios", "Dependentes", new { id = Model.FuncionarioID, Area = "Folha" }); }
+
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-primary pull-right" id="addDependentes">
+                                                        Adicionar Dependente
+                                                    </button>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab-r3">
+                                                    <div class="row">
+                                                        @{ Html.RenderAction("ListaAtrasosFucionarios", "Atrasos", new { id = Model.FuncionarioID, Area = "Folha" }); }
+
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-primary pull-right" id="addAtrasos">
+                                                        Adicionar Atraso
+                                                    </button>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab-r4">
+                                                    <div class="row">
+                                                        @{ Html.RenderAction("ListaFaltasFucionarios", "Faltas", new { id = Model.FuncionarioID, Area = "Folha" }); }
+
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-primary pull-right" id="addFaltas">
+                                                        Adicionar Falta
+                                                    </button>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab-r5">
+                                                    <div class="row">
+                                                        @{ Html.RenderAction("ListaAfastamentosFucionarios", "Afastamentos", new { id = Model.FuncionarioID, Area = "Folha" }); }
+
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-primary pull-right" id="addAfastamentos">
+                                                        Adicionar Afastamento
+                                                    </button>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab-r6">
+                                                    <div class="row">
+                                                        @{ Html.RenderAction("ListaFeriasFucionarios", "Ferias", new { id = Model.FuncionarioID, Area = "Folha" }); }
+
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab-r7">
+                                                    <div class="row">
+                                                        @{ Html.RenderAction("ListaBancosFucionarios", "Bancos", new { id = Model.FuncionarioID, Area = "Folha" }); }
+
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-primary pull-right" id="addBancos">
+                                                        Adicionar Conta Bancária
+                                                    </button>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab-r8">
+                                                    <div class="row">
+                                                        @{ Html.RenderAction("ListaHoleritesFucionarios", "Holerite", new { id = Model.FuncionarioID, Area = "Folha" }); }
+
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-primary pull-right" id="addHolerite">
+                                                        Adicionar Holerite
+                                                    </button>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab-r9">
+                                                    <div class="row">
+                                                        @{ Html.RenderAction("ListaFinanceiroFucionarios", "ControleFinanceiro", new { id = Model.FuncionarioID, Area = "Folha" }); }
+
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-primary pull-right" id="addControleFinanceiro">
+                                                        Adicionar Débitos/Créditos
+                                                    </button>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab-r10">
+                                                    <div class="row">
+                                                        @{ Html.RenderAction("ListaDisciplinaFucionarios", "MedidaDisciplinar", new { id = Model.FuncionarioID, Area = "Folha" }); }
+
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-primary pull-right" id="addMedidaDisciplinar">
+                                                        Adicionar Advertencias/Suspenções
+                                                    </button>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab-r11">
+                                                    <div class="row">
+                                                        EM CONSTRUÇÃO
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-primary pull-right" id="addBancoHora">
+                                                        Adicionar Banco de Horas
+                                                    </button>
+                                                </div>
+                                                <div class="tab-pane fade" id="tab-r12">
+                                                    <div class="row">
+                                                        @{ Html.RenderAction("ListaAusenciasFucionarios", "Ausencias", new { id = Model.FuncionarioID, Area = "Folha" }); }
+                                                    </div>
+                                                    <button type="button" class="btn btn-sm btn-primary pull-right" id="addAusencia">
+                                                        Adicionar Ausência
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end tab -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end row -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+</div>
+<!-- END MAIN CONTENT -->
+@section pagespecific {
+    <script type="text/javascript">
+
+        //DO NOT REMOVE : GLOBAL FUNCTIONS!
+        $(document).ready(function () {
+
+            $("#addEndereco").click(function () {
+                window.location.href = "/folha/enderecos/create/" +@Model.FuncionarioID;
+            });
+
+            $('#addDependentes').click(function () {
+                window.location = '/folha/dependentes/create/'+@Model.FuncionarioID;
+            });
+
+            $('#addAtrasos').click(function () {
+                window.location = '/folha/atrasos/create/'+@Model.FuncionarioID;
+            });
+
+            $('#addFaltas').click(function () {
+                window.location = '/folha/faltas/create/'+@Model.FuncionarioID;
+            });
+
+            $('#addAfastamentos').click(function () {
+                window.location = '/folha/afastamentos/create/'+@Model.FuncionarioID;
+            });
+
+            $('#addFerias').click(function () {
+                window.location = '/folha/ferias/create/'+@Model.FuncionarioID;
+            });
+
+            $('#addBancos').click(function () {
+                window.location = '/folha/bancos/create/'+@Model.FuncionarioID;
+            });
+
+            $('#addHolerite').click(function () {
+                window.location = '/folha/holerite/create/'+@Model.FuncionarioID;
+            });
+
+            $('#addControleFinanceiro').click(function () {
+                window.location = '/folha/controlefinanceiro/create/'+@Model.FuncionarioID;
+            });
+
+            $('#addMedidaDisciplinar').click(function () {
+                window.location = '/folha/medidadisciplinar/create/'+@Model.FuncionarioID;
+            });
+
+            $('#addAusencia').click(function () {
+                window.location = '/folha/ausencias/create/'+@Model.FuncionarioID;
+            });
+
+            $("#btnAddHistorico").click(function () {
+                var a = $('#novoHistorico').serialize();
+
+                $.ajax({
+                    type: 'post',
+                    url: '/folha/historicoFuncionarios/create',
+                    data: a,
+                    beforeSend: function () {
+                        //launchpreloader();
+                    },
+                    complete: function () {
+                        //stopPreloader();
+                    },
+                    success: function (result) {
+                        $.ajax({
+                            type: 'get',
+                            url: '/folha/historicoFuncionarios/ListaHistoricos/'+@Model.FuncionarioID,
+                            //data: a,
+                            beforeSend: function () {
+                                //launchpreloader();
+                            },
+                            complete: function () {
+                                //stopPreloader();
+                            },
+                            success: function (result) {
+                                $('#containerHistorico').html(result);
+                            }
+                        })
+                    },
+                    error: function(xhr,er) {
+                        $('#mensagem_erro').html('<p class="destaque">Error ' + xhr.status + ' - ' + xhr.statusText + '<br />Tipo de erro: ' + er + '</p>')
+                    }
+                })
+
+            });
+
+            $('#modificarDados').click(function () {
+                window.location = '/folha/funcionarios/edit/'+@Model.FuncionarioID;
+            });
+
+        });
+
+    </script>
+}
+
+

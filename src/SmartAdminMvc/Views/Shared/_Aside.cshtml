@@ -1,0 +1,306 @@
+﻿        <!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel">
+
+    <!-- User info -->
+    @{ Html.RenderPartial("_CurrentUser"); }
+    <!-- end user info -->
+    <!-- NAVIGATION : This navigation is also responsive
+
+    To make this navigation dynamic please make sure to link the node
+    (the reference to the nav > ul) after page load. Or the navigation
+    will not initialize.
+    -->
+    <nav>
+        <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+        Please note that these links work a bit different than
+        traditional href="" links. See documentation for details.
+        -->
+
+        <ul>
+            <li class="@Html.RouteIf("home", "active", "index")">
+                <a href="@Url.Action("index", "home", new { area = "" })" title="Dashboard">
+                    <i class="fa fa-lg fa-fw fa-home"></i>
+                    <span class="menu-item-parent">Dashboard</span>
+                </a>
+            </li>
+            <li class="@Html.RouteIf("home", "active", "inbox")">
+                <a href="@Url.Action("index", "mensagens", new { area = "Folha" })">
+                    <i class="fa fa-lg fa-fw fa-inbox infoTotalMensagensNaoLidas"></i>
+                    <span class="menu-item-parent">Mensagens</span><span class="badge pull-right inbox-badge"></span>
+                </a>
+            </li>
+            <li class="@Html.RouteIf("folha", "active", "")">
+                <a href="#">
+                    <i class="fa fa-lg fa-fw fa-book"></i>
+                    <span class="menu-item-parent"  style="min-width: 80px;">Funcionários</span>
+                </a>
+                <ul>
+                    <li class="@Html.RouteIf("", "active" ,"")">
+                        <a href="@Url.Action("index", "funcionarios", new { area = "Folha" })"><i class="fa fa-child"></i> Funcionários</a>
+                        <ul>
+                            <li class="@Html.RouteIf("historicofuncionarios", "active")">
+                                <a href="@Url.Action("index", "historicofuncionarios", new { area = "Folha" })"><i class="fa fa-tasks"></i>Observações</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("RelatorioEmExperiencia", "funcionarios", new { area = "folha" })"><i class="fa fa-child"></i>Func. Em Experiência</a>
+                    </li>
+                    <li class="@Html.RouteIf("funcionariospendentes", "active")">
+                        <a href="@Url.Action("indexPendentes", "funcionarios", new { area = "Folha" })"><i class="fa fa-child"></i>Funcionários Indiretos</a>
+                    </li>
+                    <li class="@Html.RouteIf("funcionariospendentes", "active")">
+                        <a href="@Url.Action("indexDemitidos", "funcionarios", new { area = "Folha"})"><i class="fa fa-child"></i>Funcionários Demitidos</a>
+                    </li>
+                    <li class="@Html.RouteIf("folha", "active")">
+                        <a href="#"><i class="fa fa-dollar"></i>Lançamentos</a>
+                        <ul>
+                            <li class="@Html.RouteIf("atrasos", "active")">
+                                <a href="@Url.Action("index", "atrasos", new { area = "Folha" })">Atrasos</a>
+                            </li>
+                            <li class="@Html.RouteIf("faltas", "active")">
+                                <a href="@Url.Action("index", "faltas", new { area = "Folha" })">Faltas</a>
+                            </li>
+                            <li class="@Html.RouteIf("ausencias", "active")">
+                                <a href="@Url.Action("index", "ausencias", new { area = "Folha" })">Ausências</a>
+                            </li>
+                            <li class="@Html.RouteIf("medidadisciplinar", "active")">
+                                <a href="@Url.Action("index", "medidadisciplinar", new { area = "Folha" })">Advertências e Suspensões</a>
+                            </li>
+                            <li class="@Html.RouteIf("bancos", "active")">
+                                <a href="@Url.Action("index", "bancos", new { area = "Folha" })">Dados Bancários</a>
+                            </li>
+                            <li class="@Html.RouteIf("cargos", "active")">
+                                <a href="@Url.Action("index", "cargoes", new { area = "Folha" })">Cargos</a>
+                            </li>
+                            <li class="@Html.RouteIf("turnos", "active")">
+                                <a href="@Url.Action("index", "turnos", new { area = "Folha" })">Turnos</a>
+                            </li>
+                            <li class="@Html.RouteIf("enderecos", "active")">
+                                <a href="@Url.Action("index", "enderecos", new { area = "Folha" })">Manutenção de Endereços</a>
+                            </li>
+                            <li class="@Html.RouteIf("dependentes", "active")">
+                                <a href="@Url.Action("index", "pensoes", new { area = "Folha" })">Manutenção de Pensão</a>
+                            </li>
+                            <li class="@Html.RouteIf("dependentes", "active")">
+                                <a href="@Url.Action("index", "dependentes", new { area = "Folha" })">Manutenção de Dependentes</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="@Html.RouteIf("folha", "active", "")">
+                <a href="#">
+                    <i class="fa fa-lg fa-fw fa-book"></i>
+                    <span class="menu-item-parent">Cadastros</span>
+                </a>
+                <ul>
+                    <li class="@Html.RouteIf("motivotipoapontamento", "active")">
+                        <a href="@Url.Action("index", "motivotipoapontamento")"><i class="fa fa-floppy-o"></i> Motivo Tipo Apontamento</a>
+                    </li>
+                    <li class="@Html.RouteIf("proventoes", "active")">
+                        <a href="@Url.Action("index", "proventoes")"><i class="fa fa-floppy-o"></i> Proventos</a>
+                    </li>
+                    <li class="@Html.RouteIf("descontoes", "active")">
+                        <a href="@Url.Action("index", "descontoes")"><i class="fa fa-floppy-o"></i> Descontos</a>
+                    </li>
+                    <li class="@Html.RouteIf("tipoapontamento", "active")">
+                        <a href="@Url.Action("index", "tipoapontamento")"><i class="fa fa-floppy-o"></i> Tipo de Apontamento</a>
+                    </li>
+                    <li class="@Html.RouteIf("tipocontas", "active")">
+                        <a href="@Url.Action("index", "tipocontas")"><i class="fa fa-floppy-o"></i> Tipo de Conta</a>
+                    </li>
+                    <li class="@Html.RouteIf("tipoferias", "active")">
+                        <a href="@Url.Action("index", "tipoferias")"><i class="fa fa-floppy-o"></i> Tipo de Férias</a>
+                    </li>
+                    <li class="@Html.RouteIf("tipojornada", "active")">
+                        <a href="@Url.Action("index", "tipojornada")"><i class="fa fa-floppy-o"></i> Tipo de Jornada</a>
+                    </li>
+                    <li class="@Html.RouteIf("tipomedidadisciplinar", "active")">
+                        <a href="@Url.Action("index", "tipomedidadisciplinar")"><i class="fa fa-floppy-o"></i> Tipo de Medida Disciplinar</a>
+                    </li>
+                    <li class="@Html.RouteIf("tipooperacaos", "active")">
+                        <a href="@Url.Action("index", "tipooperacaos")"><i class="fa fa-floppy-o"></i> Tipo de Operacao</a>
+                    </li>
+                    <li class="@Html.RouteIf("tipopostotrabalho", "active")">
+                        <a href="@Url.Action("index", "tipopostotrabalho")"><i class="fa fa-floppy-o"></i> Tipo de Postos Trabalho</a>
+                    </li>
+                    <li class="@Html.RouteIf("escalas", "active")">
+                        <a href="@Url.Action("index", "escalas", new { area = "Folha" })"><i class="fa fa-floppy-o"></i> Escalas</a>
+                    </li>
+                    <li class="@Html.RouteIf("periodo", "active")">
+                        <a href="@Url.Action("index", "periodo", new { area = "Folha" })"><i class="fa fa-floppy-o"></i> Períodos de Trabalho</a>
+                    </li>
+                    <li class="@Html.RouteIf("folha", "active")">
+                        <a href="#"><i class="fa fa-dollar"></i> Base Salarial</a>
+                        <ul>
+                            <li class="@Html.RouteIf("Salarios", "active")">
+                                <a href="@Url.Action("index", "Salarios", new { area = "Folha" })">Salarios</a>
+                            </li>
+                            <li class="@Html.RouteIf("tabelaINSSes", "active")">
+                                <a href="@Url.Action("index", "tabelaINSSes", new { area = "Folha" })">Tabela INSS</a>
+                            </li>
+                            <li class="@Html.RouteIf("TabelaIRPFs", "active")">
+                                <a href="@Url.Action("index", "TabelaIRPFs", new { area = "Folha" })">Tabela IRPF</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="@Html.RouteIf("folha", "active")">
+                <a href="#">
+                    <i class="fa fa-lg fa-fw fa-suitcase"></i>
+                    <span class="menu-item-parent">Funções</span>
+                </a>
+                <ul>
+                    <li class="@Html.RouteIf("controlefinanceiro", "active")">
+                        <a href="@Url.Action("index", "controlefinanceiro", new { area = "Folha" })">Histórico Financeiro Funcionário</a>
+                    </li>
+                    <li class="@Html.RouteIf("gestaoescalas", "active", "ConfigurarEscala")">
+                        <a href="@Url.Action("ConfigurarEscala", "gestaoescalas", new { area = "Folha" })">Configurar Escalas</a>
+                    </li>
+                    <li class="@Html.RouteIf("gestaoescalas", "active", "GerirEscala")">
+                        <a href="@Url.Action("GerirEscala", "gestaoescalas", new { area = "Folha" })">Controle de Escalas</a>
+                    </li>
+                    <li class="@Html.RouteIf("beneficios", "active")">
+                        <a href="@Url.Action("index", "beneficios", new { area = "Folha" })">Ajuste de VT, VA, VR</a>
+                    </li>
+                    <li class="@Html.RouteIf("folhacontabil", "active")">
+                        <a href="@Url.Action("index", "folhacontabil", new { area = "Folha" })">Gerar Folha Contábil</a>
+                    </li>
+                    <li class="@Html.RouteIf("Programação de Férias", "active")">
+                        <a href="@Url.Action("index", "Ferias", new { area = "Folha" })">Programação de Férias</a>
+                    </li>
+                    <li class="@Html.RouteIf("Programação de Férias", "active")">
+                        <a href="@Url.Action("FeriasOK", "Ferias", new { area = "Folha" })">Relatório de Férias Recentes</a>
+                    </li>
+                    <li class="@Html.RouteIf("Programação de Férias", "active")">
+                        <a href="@Url.Action("RelatorioMensal", "Ferias", new { area = "Folha" })">Relatório de Férias Geral</a>
+                    </li>
+                    <li class="@Html.RouteIf("recisaos", "active")">
+                        <a href="@Url.Action("index", "recisaos", new { area = "Folha" })">Rescisão</a>
+                    </li>
+                    <li class="red">
+                        <a href="#">Aplicar Dissídio</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="@Html.RouteIf("folha", "active")">
+                <a href="#">
+                    <i class="fa fa-lg fa-fw fa-gears"></i>
+                    <span class="menu-item-parent">Empresas</span>
+                </a>
+                <ul>
+                    <li class="@Html.RouteIf("empresas", "active")">
+                        <a href="@Url.Action("index", "empresas", new { area = "Folha" })">Empresas</a>
+                    </li>
+                    <li class="@Html.RouteIf("grupos", "active")">
+                        <a href="@Url.Action("index", "grupos", new { area = "Folha" })">Grupos de Clientes</a>
+                    </li>
+                    <li class="@Html.RouteIf("clientes", "active")">
+                        <a href="@Url.Action("index", "clientes", new { area = "Folha" })">Clientes</a>
+                    </li>
+                    <li class="@Html.RouteIf("contratos", "active")">
+                        <a href="@Url.Action("index", "contratos", new { area = "Folha" })">Contratos</a>
+                    </li>
+                    <li class="@Html.RouteIf("alocacao", "active")">
+                        <a href="@Url.Action("index", "alocacao", new { area = "Folha" })">Alocações por Contrato</a>
+                    </li>
+                    <li class="@Html.RouteIf("postotrabalho", "active")">
+                        <a href="@Url.Action("index", "postotrabalho", new { area = "Folha" })">Postos de Trabalho</a>
+                    </li>
+                </ul>
+            </li>
+            @*<li class="@Html.RouteIf("folha", "active")">
+                <a href="#">
+                    <i class="fa fa-lg fa-fw fa-gears"></i>
+                    <span class="menu-item-parent">Rotinas</span>
+                </a>
+                <ul>
+                    <li class="red">
+                        <a href="#">Regra pré processamento</a>
+                    </li>
+                    <li class="red_bold_bg_20">
+                        <a href="#">Calcular Folha</a>
+                    </li>
+                    <li class="red_bold_bg_20">
+                        <a href="#">Alertas pós Processamento</a>
+                    </li>
+                </ul>
+            </li>*@
+            <li class="@Html.RouteIf("folha", "active")">
+                <a href="#">
+                    <i class="fa fa-lg fa-fw fa-file-text-o"></i>
+                    <span class="menu-item-parent">Relatórios</span>
+                </a>
+                <ul>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("RelatorioAnalitico", "funcionarios", new { area = "folha", tipo = "Ativos" })">Funcionários Ativos</a>
+                    </li>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("RelatorioAnalitico", "funcionarios", new { area = "folha", tipo = "Inativos"})">Funcionários Inativos</a>
+                    </li>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("RelatorioGeral", "funcionarios", new { area = "folha", tipo = "Ativos" })">Dados de Funcionários</a>
+                    </li>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("relatorio", "bancos", new { area = "folha", tipo = "Ativos" })">Dados Bancários</a>
+                    </li>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("RelatorioAnalitico", "funcionarios", new { area = "folha" })">Funcionários (Todos)</a>
+                    </li>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("RelatorioMensal", "faltas", new { area = "folha" })">Mensal de Faltas</a>
+                    </li>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("index", "relatoriofinanceiro", new { area = "relatorios" })">Folha Analítica</a>
+                    </li>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("index", "relatoriofinanceiro", new { area = "relatorios" })">Folha Sintética</a>
+                    </li>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("index", "relatoriofinanceiro", new { area = "relatorios" })">Resumo da Folha</a>
+                    </li>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("index", "relatoriofinanceiro", new { area = "relatorios" })">Relatório Financeiro</a>
+                    </li>
+                    <li class="@Html.RouteIf("holerite", "active")">
+                        <a href="@Url.Action("index", "holerite", new { area = "folha" })">Holerite</a>
+                    </li>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("index", "relatoriofinanceiro", new { area = "relatorios" })">Recibo Pagamento</a>
+                    </li>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("index", "relatoriofinanceiro", new { area = "relatorios" })">Recebibo Recisões / FGTS</a>
+                    </li>
+                    <li class="@Html.RouteIf("relatorios", "active")">
+                        <a href="@Url.Action("index", "relatoriofinanceiro", new { area = "relatorios" })">Impressão de Escalas</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="@Html.RouteIf("folha", "active")">
+                <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Configurar</span></a>
+                <ul>
+
+                    <li class="@Html.RouteIf("ControleAcesso", "active")">
+                        <a href="@Url.Action("Usuarios","ControleAcesso", new { area = "" })">Usuários</a>
+                    </li>
+                    <li class="@Html.RouteIf("ControleAcesso", "active")">
+                        <a href="@Url.Action("Usuarios", "ControleAcesso", new { area = "" })">Controle de acesso</a>
+                    </li>
+                    <li class="@Html.RouteIf("ControleAcesso", "active")">
+                        <a href="@Url.Action("index", "ControleAcesso", new { area = "" }), ">Backup dos dados</a>
+                    </li>
+                    <li class="@Html.RouteIf("ControleAcesso", "active")">
+                        <a href="@Url.Action("index", "ControleAcesso", new { area = "" })">Envio de e-mail</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <span class="minifyme" data-action="minifyMenu">
+        <i class="fa fa-arrow-circle-left hit"></i>
+    </span>
+</aside>
+<!-- END NAVIGATION -->
