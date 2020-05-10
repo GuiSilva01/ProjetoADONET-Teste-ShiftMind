@@ -15,7 +15,7 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
 {
     public class FuncionariosController : BaseAreaController
     {
-        
+
 
         public FuncionariosController()
         {
@@ -31,7 +31,7 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
             //var url = Url.RouteUrl()
             object funcionarioID = "";
             this.ControllerContext.RouteData.Values.TryGetValue("id", out funcionarioID);
-            if(funcionarioID!= null)
+            if (funcionarioID != null)
             {
                 String pathDocumentos = Server.MapPath("~/Documentos/" + funcionarioID.ToString());
                 bool exists = System.IO.Directory.Exists(pathDocumentos);
@@ -61,7 +61,7 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
             foreach (var f in db.Funcionario.ToList())
             {
                 String pathDocumentos = Server.MapPath("~/Documentos/" + f.FuncionarioID);
-                String pathDocumentosNovo = Server.MapPath("~/Documentos/" + f.FuncionarioID + "_" + f.Nome.Replace(" ","_"));
+                String pathDocumentosNovo = Server.MapPath("~/Documentos/" + f.FuncionarioID + "_" + f.Nome.Replace(" ", "_"));
 
                 bool exists = System.IO.Directory.Exists(pathDocumentos);
                 if (!exists)
@@ -72,27 +72,27 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
                     System.IO.Directory.CreateDirectory(pathDocumentosNovo);
             }
 
-            var funcionario = db.Funcionario.Where(x=>x.Admissao != null && x.Demissao == null).Include(f => f.Empresa).Include(f => f.PostoTrabalho);
+            var funcionario = db.Funcionario.Where(x => x.Admissao != null && x.Demissao == null).Include(f => f.Empresa).Include(f => f.PostoTrabalho);
 
             return View(await funcionario.ToListAsync());
         }
 
         public async Task<ActionResult> IndexPendentes()
         {
-            var funcionario = db.Funcionario.Where(x=>x.Admissao == null).Include(f => f.Empresa).Include(f => f.PostoTrabalho);
-            return View("Pendentes",await funcionario.ToListAsync());
+            var funcionario = db.Funcionario.Where(x => x.Admissao == null).Include(f => f.Empresa).Include(f => f.PostoTrabalho);
+            return View("Pendentes", await funcionario.ToListAsync());
         }
 
         public async Task<ActionResult> IndexDemitidos()
         {
-            var funcionario = db.Funcionario.Where(x=>x.Demissao != null).Include(f => f.Empresa).Include(f => f.PostoTrabalho);
-            return View("Demitidos",await funcionario.ToListAsync());
+            var funcionario = db.Funcionario.Where(x => x.Demissao != null).Include(f => f.Empresa).Include(f => f.PostoTrabalho);
+            return View("Demitidos", await funcionario.ToListAsync());
         }
 
         #region Visualizar
         // GET: Folha/Funcionarios/Details/5
         public async Task<ActionResult> Details(int? id)
-        {            
+        {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -105,7 +105,7 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
 
             CreateViewBags(funcionario);
 
-             String pathDocumentos = Server.MapPath("~/Documentos/" + id);
+            String pathDocumentos = Server.MapPath("~/Documentos/" + id);
             ViewBag.Images = System.IO.Directory.EnumerateFiles(pathDocumentos).Select(fn => "~/Documentos/" + id + "/" + System.IO.Path.GetFileName(fn));
 
             return View(funcionario);
@@ -139,12 +139,12 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
 
             String pathDocumentos = Server.MapPath("~/Documentos/" + id);
             ViewBag.Images = System.IO.Directory.EnumerateFiles(pathDocumentos).Select(fn => "~/Documentos/" + id + "/" + System.IO.Path.GetFileName(fn));
-            return View("Visualizar",funcionario);
+            return View("Visualizar", funcionario);
         }
 
         public async Task<ActionResult> DetailsPartial(int? id)
         {
-           if (id == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -230,6 +230,8 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
                 return HttpNotFound();
             }
             ViewBag.Cargo = new SelectList(db.Cargo.ToList(), "CargoID", "Nome", funcionario.CargoID);
+            ViewBag.Escala = new SelectList(db.Escala.ToList(), "EscalaID", "Nome", funcionario.EscalaID);
+            ViewBag.Turno = new SelectList(db.Turno.ToList(), "TurnoID", "Nome", funcionario.TurnoID);
             ViewBag.Empresa = new SelectList(db.Empresa.ToList(), "EmpresaID", "Nome", funcionario.EmpresaID);
             ViewBag.Empresa2 = new SelectList(db.Empresa.ToList(), "EmpresaID", "Nome", funcionario.Empresa2ID);
             ViewBag.Empresa3 = new SelectList(db.Empresa.ToList(), "EmpresaID", "Nome", funcionario.Empresa3ID);
@@ -259,7 +261,7 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
 
             if (ModelState.IsValid)
             {
-                
+
                 db.Entry(funcionario).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -365,7 +367,7 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
             funcionario.UsuarioAlteracao = User.Identity.Name;
 
             if (file != null)
-            {                
+            {
                 String[] strName = file.FileName.Split('.');
                 String strExt = strName[strName.Count() - 1];
                 string pathSave = String.Format("{0}{1}.{2}", Server.MapPath("~/Fotos/"), "F-" + id, strExt);
@@ -373,14 +375,14 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
 
                 file.SaveAs(pathSave);
                 funcionario.Foto = pathBase;
-            }   
+            }
 
             if (ModelState.IsValid)
             {
                 db.Entry(funcionario).State = EntityState.Modified;
                 db.SaveChanges();
             }
-            
+
             return View("_UploadFoto", funcionario);
         }
 
@@ -389,7 +391,7 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
         public ActionResult UploadDocumentos(HttpPostedFileBase file)
         {
             int id = Int32.Parse(Request.Form["FuncionarioID"]);
-            string nomeDocumento = Request.Form["nomeDocumento"].Replace(" ","_");
+            string nomeDocumento = Request.Form["nomeDocumento"].Replace(" ", "_");
             Funcionario funcionario = db.Funcionario.Find(id);
 
             if (file != null)
@@ -402,11 +404,11 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
                 if (!exists)
                     System.IO.Directory.CreateDirectory(pathDocumentos);
 
-                string pathSave = pathDocumentos + "/" +nomeDocumento+"."+strExt;
+                string pathSave = pathDocumentos + "/" + nomeDocumento + "." + strExt;
 
                 file.SaveAs(pathSave);
 
-                ViewBag.Images = System.IO.Directory.EnumerateFiles(pathDocumentos).Select(fn => "~/Documentos/"+ id + "/" + System.IO.Path.GetFileName(fn));
+                ViewBag.Images = System.IO.Directory.EnumerateFiles(pathDocumentos).Select(fn => "~/Documentos/" + id + "/" + System.IO.Path.GetFileName(fn));
             }
 
             return View("_UploadDocumentos", funcionario);
@@ -419,14 +421,14 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
             int id = Int32.Parse(Request.Form["FuncionarioID"]);
             string nomeDocumento = Request.Form["imagem"];
             Funcionario funcionario = db.Funcionario.Find(id);
-                       
+
             String pathDocumentos = Server.MapPath("~/Documentos/" + id);
             string pathSave = pathDocumentos + "/" + nomeDocumento;
             if (nomeDocumento != null)
             {
                 System.IO.File.Delete(pathSave);
 
-               
+
             }
 
             ViewBag.Images = System.IO.Directory.EnumerateFiles(pathDocumentos).Select(fn => "~/Documentos/" + id + "/" + System.IO.Path.GetFileName(fn));
@@ -506,7 +508,7 @@ namespace SmartAdminMvc.Areas.Folha.Controllers
                 funcionario = db.Funcionario.Include(f => f.Empresa).Include(f => f.PostoTrabalho);
             }
 
-            return View(await funcionario.OrderBy(x=>x.Nome).ToListAsync());
+            return View(await funcionario.OrderBy(x => x.Nome).ToListAsync());
 
         }
         #endregion

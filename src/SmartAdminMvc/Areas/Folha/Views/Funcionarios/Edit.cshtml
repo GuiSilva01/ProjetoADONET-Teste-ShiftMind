@@ -598,6 +598,26 @@
                                             <div class="row">
                                                 <section class="col col-4">
                                                     <label class="label">
+                                                        Inicio
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.Inicio, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.Inicio, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Inicio
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.Inicio, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.Inicio, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
                                                         Data Exame Admissional
                                                     </label>
                                                     <label class="input">
@@ -606,19 +626,23 @@
                                                         @Html.ValidationMessageFor(model => model.DataExameAdmissional, "", new { @class = "text-danger" })
                                                     </label>
                                                 </section>
+                                            </div>
+                                            <div class="row">
                                                 <section class="col col-4">
                                                     <label class="label">
-                                                        Escala/Horário
+                                                        Inicio da Escala
                                                     </label>
                                                     <label class="input">
                                                         <i class="icon-prepend fa fa-edit"></i>
-                                                        @Html.EditorFor(model => model.EscalaHorario, new { htmlAttributes = new { @type = "text", @name = "EscalaHorario", @placeholder = "", @class = "form-control" } })
+                                                        @Html.EditorFor(model => model.EscalaHorario, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
                                                         @Html.ValidationMessageFor(model => model.EscalaHorario, "", new { @class = "text-danger" })
                                                     </label>
                                                 </section>
-                                                <section class="col col-4">
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-3">
                                                     <label class="label">
-                                                        Posto de trabalho da 1° Empresa
+                                                        Posto de trabalho
                                                     </label>
                                                     <label class="select">
                                                         @Html.DropDownListFor(model => model.PostoTrabalhoID, (SelectList)ViewBag.PostoTrabalho)
@@ -626,9 +650,9 @@
                                                     </label>
                                                     @Html.ValidationMessageFor(model => model.PostoTrabalhoID, "", new { @class = "text-danger" })
                                                 </section>
-                                                <section class="col col-4">
+                                                <section class="col col-3">
                                                     <label class="label">
-                                                        Lider deste funcionário
+                                                        Lider do Posto
                                                     </label>
                                                     <label class="select">
                                                         @Html.DropDownListFor(model => model.LiderID, (SelectList)ViewBag.Lider, "Selecione se necessário")
@@ -638,7 +662,248 @@
                                                 </section>
                                                 <section class="col col-2">
                                                     <label class="label">
-                                                        Adicional Liderança
+                                                        Escala
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.EscalaID, (SelectList)ViewBag.Escala, "Selecione se necessário")
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.EscalaID, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label class="label">
+                                                        Turno
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.TurnoID, (SelectList)ViewBag.Turno, "Selecione se necessário")
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.TurnoID, "", new { @class = "text-danger" })
+                                                </section>
+                                            </div>
+                                            <table class="table col-10">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.DiaDaSemana)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.HorarioEntrada)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.HorarioSaida)
+                                                        </th>
+                                                        <th>
+                                                            @Html.DisplayNameFor(model => model.Descanso)
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label">
+                                                                Segunda
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioEntrada)
+                                                                @Html.ValidationMessageFor(model => model.HorarioEntrada)
+                                                            </label>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioSaida)
+                                                                @Html.ValidationMessageFor(model => model.HorarioSaida)
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.Descanso)
+                                                                @Html.ValidationMessageFor(model => model.Descanso)
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label">
+                                                                Terca
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioEntrada)
+                                                                @Html.ValidationMessageFor(model => model.HorarioEntrada)
+                                                            </label>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioSaida)
+                                                                @Html.ValidationMessageFor(model => model.HorarioSaida)
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.Descanso)
+                                                                @Html.ValidationMessageFor(model => model.Descanso)
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label">
+                                                                Quarta
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioEntrada)
+                                                                @Html.ValidationMessageFor(model => model.HorarioEntrada)
+                                                            </label>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioSaida)
+                                                                @Html.ValidationMessageFor(model => model.HorarioSaida)
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.Descanso)
+                                                                @Html.ValidationMessageFor(model => model.Descanso)
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label">
+                                                                Quinta
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioEntrada)
+                                                                @Html.ValidationMessageFor(model => model.HorarioEntrada)
+                                                            </label>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioSaida)
+                                                                @Html.ValidationMessageFor(model => model.HorarioSaida)
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.Descanso)
+                                                                @Html.ValidationMessageFor(model => model.Descanso)
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label">
+                                                                Sexta
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioEntrada)
+                                                                @Html.ValidationMessageFor(model => model.HorarioEntrada)
+                                                            </label>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioSaida)
+                                                                @Html.ValidationMessageFor(model => model.HorarioSaida)
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.Descanso)
+                                                                @Html.ValidationMessageFor(model => model.Descanso)
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label">
+                                                                Sabado
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioEntrada)
+                                                                @Html.ValidationMessageFor(model => model.HorarioEntrada)
+                                                            </label>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioSaida)
+                                                                @Html.ValidationMessageFor(model => model.HorarioSaida)
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.Descanso)
+                                                                @Html.ValidationMessageFor(model => model.Descanso)
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label">
+                                                                Domingo
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioEntrada)
+                                                                @Html.ValidationMessageFor(model => model.HorarioEntrada)
+                                                            </label>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.HorarioSaida)
+                                                                @Html.ValidationMessageFor(model => model.HorarioSaida)
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <label class="input">
+                                                                @Html.EditorFor(model => model.Descanso)
+                                                                @Html.ValidationMessageFor(model => model.Descanso)
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="row" style="margin-top: 15px;">
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Total de Horas Trabalhada
+                                                    </label>
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.TotalHorasTrabalhada)
+                                                        @Html.ValidationMessageFor(model => model.TotalHorasTrabalhada)
+                                                    </label>
+                                                </section>
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-3">
+                                                    <label class="label">
+                                                        Função
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.Cargo.Funcao, (SelectList)ViewBag.Cargo, "Selecione se necessário")
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.Cargo.Funcao, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-3">
+                                                    <label class="label">
+                                                        Piso Salarial
+                                                    </label>
+                                                    <label class="select">
+                                                        @Html.DropDownListFor(model => model.Salario.PisoSalarial, (SelectList)ViewBag.Salario, "Selecione se necessário")
+                                                        <i></i>
+                                                    </label>
+                                                    @Html.ValidationMessageFor(model => model.Salario.PisoSalarial, "", new { @class = "text-danger" })
+                                                </section>
+                                                <section class="col col-2">
+                                                    <label class="label">
+                                                        Liderança
                                                     </label>
                                                     <label class="checkbox">
                                                         @Html.CheckBoxFor(model => model.Lideranca)
@@ -648,16 +913,102 @@
                                                 </section>
                                                 <section class="col col-2">
                                                     <label class="label">
-                                                        Faixa Salarial
+                                                        Vale Transporte
                                                     </label>
-                                                    <label class="select">
-                                                        @Html.DropDownListFor(model => model.SalarioID, (SelectList)ViewBag.Salario, "Selecione se necessário")
+                                                    <label class="checkbox">
+                                                        @Html.CheckBoxFor(model => model.OpcaoValeTransporte)
                                                         <i></i>
                                                     </label>
-                                                    @Html.ValidationMessageFor(model => model.SalarioID, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessageFor(model => model.OpcaoValeTransporte, "", new { @class = "text-danger" })
                                                 </section>
-
-
+                                            </div>
+                                            <div class="bg-success" style="margin-bottom: 10px;">
+                                                Previsão Financeira
+                                            </div>
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Provisao de Vale
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.ProvisaoDeVale, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.ProvisaoDeVale, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Provisao de pagamento
+                                                    </label>
+                                                    <label class="input">
+                                                        <i class="icon-prepend fa fa-edit"></i>
+                                                        @Html.EditorFor(model => model.ProvisaoDePagto, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.ProvisaoDePagto, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Valor Desconto VT
+                                                    </label>
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.ValorDesconto, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.ValorDesconto, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Adicional Lider
+                                                    </label>
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.AdicionalLider, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.AdicionalLider, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Valor Hora Extra + DSR
+                                                    </label>
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.ValorHrExtraeDSR, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.ValorHrExtraeDSR, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Valor Adicinal Norturno
+                                                    </label>
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.ValorAdicNortuno, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.ValorAdicNortuno, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Valor Vale Alimentacao
+                                                    </label>
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.ValorValeAlimen, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.ValorValeAlimen, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Valor Vale Transporte
+                                                    </label>
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.ValorValeTrans, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.ValorValeTrans, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">
+                                                        Valor Vale Refeicao
+                                                    </label>
+                                                    <label class="input">
+                                                        @Html.EditorFor(model => model.ValorValeRefeic, new { htmlAttributes = new { @class = "form-control", @data_mask = "00/00/0000", @data_mask_selectionfocus = "true" } })
+                                                        @Html.ValidationMessageFor(model => model.ValorValeRefeic, "", new { @class = "text-danger" })
+                                                    </label>
+                                                </section>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -734,6 +1085,7 @@
                             }
                         </div>
                     </div>
+                </div>
             </article>
         </div>
     </section>

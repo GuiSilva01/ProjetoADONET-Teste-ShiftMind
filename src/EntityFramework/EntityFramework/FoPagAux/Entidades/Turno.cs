@@ -17,5 +17,7 @@ namespace EntityFrameworkFolha.FoPagAux.Entidades
         [Required(ErrorMessage = MensagemErro.CampoObrigatorio)]
         public string Nome { get; set; }
 
+        public virtual ICollection<PostoTrabalho> PostosTrabalho { get; set; }
+
     }
 }

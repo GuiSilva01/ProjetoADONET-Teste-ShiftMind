@@ -3,10 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
+
 
 namespace EntityFrameworkFolha.FoPagAux.Entidades
 {
@@ -42,11 +40,37 @@ namespace EntityFrameworkFolha.FoPagAux.Entidades
 
         public string Naturalidade { get; set; }
 
+        [Display(Name = "Dia Da Semana")]
+        public string DiaDaSemana { get; set; }
+
+        [Display(Name = "Horario de Entrada")]
+        [DataType(DataType.Time)]
+        public DateTime? HorarioEntrada { get; set; }
+        [DataType(DataType.Time)]
+        [Display(Name = "Horario de Saída")]
+        public DateTime? HorarioSaida { get; set; }
+        public int Descanso { get; set; }
+        [Display(Name = "Total de horas trabalhada")]
+        public double TotalHorasTrabalhada { get; set; }
+
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido")]
+        public DateTime? ProvisaoDeVale { get; set; }
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido")]
+        public DateTime? ProvisaoDePagto { get; set; }
+        public double ValorDesconto { get; set; }
+        public double AdicionalLider { get; set; }
+        public double ValorHrExtraeDSR { get; set; }
+        public double ValorAdicNortuno { get; set; }
+        public double ValorValeAlimen { get; set; }
+        public double ValorValeTrans { get; set; }
+        public double ValorValeRefeic { get; set; }
+
         public DateTime? DataNascimento { get; set; }
 
         public DateTime? DataExameAdmissional { get; set; }
 
-        public string EscalaHorario { get; set; }
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido")]
+        public DateTime? EscalaHorario { get; set; }
 
         public DateTime? DataEmissaoRG { get; set; }
 
@@ -75,6 +99,12 @@ namespace EntityFrameworkFolha.FoPagAux.Entidades
         public int? CargoID { get; set; }
 
         public virtual Cargo Cargo { get; set; }
+        public int? EscalaID { get; set; }
+
+        public virtual Escala Escala { get; set; }
+        public int? TurnoID { get; set; }
+
+        public virtual Turno Turno { get; set; }
 
         public int? LiderID { get; set; }
 
@@ -187,7 +217,7 @@ namespace EntityFrameworkFolha.FoPagAux.Entidades
 
         public int? QtdFilhos { get; set; }
 
-        public string IdadesFilhos {get; set;}
+        public string IdadesFilhos { get; set; }
 
         public string NomeRua { get; set; }
 

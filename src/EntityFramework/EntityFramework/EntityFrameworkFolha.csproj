@@ -159,6 +159,14 @@
     <Compile Include="FoPagAux\FeriasValidation.cs" />
     <Compile Include="FoPagAux\FoPagAuxDbContext.cs" />
     <Compile Include="FoPagAux\RecisaoValidation.cs" />
+    <Compile Include="Migrations\202005101622228_Inicial.cs" />
+    <Compile Include="Migrations\202005101622228_Inicial.Designer.cs">
+      <DependentUpon>202005101622228_Inicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202005101627265_EntidadeAtualizada.cs" />
+    <Compile Include="Migrations\202005101627265_EntidadeAtualizada.Designer.cs">
+      <DependentUpon>202005101627265_EntidadeAtualizada.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\CustomValidators.cs" />
@@ -172,6 +180,14 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202005101622228_Inicial.resx">
+      <DependentUpon>202005101622228_Inicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202005101627265_EntidadeAtualizada.resx">
+      <DependentUpon>202005101627265_EntidadeAtualizada.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
